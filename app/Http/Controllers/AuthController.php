@@ -10,24 +10,24 @@ use App\Models\User;
 class AuthController extends Controller
 {
     public function showLogin()
-{
-    if (Auth::check()) {
-        $user = Auth::user();
-        return $user->isAdminPPTK()
-            ? redirect()->route('admin.dashboard')
-            : redirect()->route('tenaga-pendidik.dashboard');
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            return $user->isAdminPPTK()
+                ? redirect()->route('admin.dashboard')
+                : redirect()->route('tenaga-pendidik.dashboard');
+        }
+        return view('auth.login');
     }
-    return view('auth.login');
-}
 
     public function login(Request $request)
     {
-        
+
         $credentials = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
-        
+
 
         $user = User::where('username', $request->username)->first();
 
@@ -55,4 +55,5 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login');
     }
+    //tes
 }
