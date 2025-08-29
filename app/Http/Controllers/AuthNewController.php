@@ -23,6 +23,7 @@ class AuthNewController extends Controller
          
         $credentials = $request->validate([
             'email' => ['required', 'email'],
+            'nik'=>[],
             'password' => ['required'],
         ]);
         
@@ -33,7 +34,7 @@ class AuthNewController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'email' => 'Email ,Nik atau password salah.',
         ])->onlyInput('email');
     }
 
@@ -48,6 +49,7 @@ class AuthNewController extends Controller
             'nama' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:pengguna'],
             'nomor_hp' => ['required', 'string', 'max:15'],
+            'nik'=> ['required','string','max:16','unique:pengguna'],
             'alamat_tanggallahir' => ['required', 'string'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -56,6 +58,7 @@ class AuthNewController extends Controller
             'nama' => $request->nama,
             'email' => $request->email,
             'nomor_hp' => $request->nomor_hp,
+            'nik'=>$request->nik,
             'alamat_tanggallahir' => $request->alamat_tanggallahir,
             'password' => Hash::make($request->password),
             'role' => 'nonadmin', // Default role

@@ -37,6 +37,21 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="nik" class="form-label">nik</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="nik" class="form-control @error('nik') is-invalid @enderror" 
+                               id="nik" name="nik" value="{{ old('nik') }}"
+                               placeholder="Masukkan NIK Anda">
+                    </div>
+                    @error('nik')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
                 <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">

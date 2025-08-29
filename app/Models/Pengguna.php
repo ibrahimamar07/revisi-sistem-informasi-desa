@@ -18,6 +18,7 @@ class Pengguna extends Authenticatable
         'nama',
         'email',
         'nomor_hp',
+        'nik',
         'alamat_tanggallahir',
         'password',
         'role',

@@ -51,6 +51,21 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="nik" class="form-label">nik</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="nik" class="form-control @error('nik') is-invalid @enderror" 
+                               id="nik" name="nik" value="{{ old('nik') }}" required 
+                               placeholder="Masukkan NIK Anda">
+                    </div>
+                    @error('nik')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="nomor_hp" class="form-label">Nomor HP</label>
                     <div class="input-group">
                         <span class="input-group-text">
@@ -116,7 +131,7 @@
 
             <div class="text-center mt-3">
                 <p class="mb-0">Sudah punya akun? 
-                    <a href="{{ route('login') }}" class="text-decoration-none">Login di sini</a>
+                    <a href="{{ route('loginpenduduk') }}" class="text-decoration-none">Login di sini</a>
                 </p>
             </div>
         </div>
