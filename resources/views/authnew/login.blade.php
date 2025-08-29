@@ -12,6 +12,14 @@
                 <p class="text-muted">Silakan login untuk melanjutkan</p>
             </div>
 
+            <div class="alert alert-info text-sm">
+                <i class="bi bi-info-circle-fill me-2"></i>
+                <strong>Catatan:</strong> 
+                Jika Anda adalah <b>Non-Admin</b>, harap masukkan <b>NIK</b> Anda untuk login.
+                <br>
+                Jika Anda adalah <b>Admin</b>, cukup gunakan <b>Email & Password</b>.
+            </div>
+
             @if ($errors->any())
                 <div class="alert alert-danger">
                     @foreach ($errors->all() as $error)
@@ -38,14 +46,14 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="nik" class="form-label">nik</label>
+                    <label for="nik" class="form-label">NIK</label>
                     <div class="input-group">
                         <span class="input-group-text">
-                            <i class="fas fa-envelope"></i>
+                            <i class="bi bi-person-vcard"></i>
                         </span>
-                        <input type="nik" class="form-control @error('nik') is-invalid @enderror" 
+                        <input type="text" class="form-control @error('nik') is-invalid @enderror" 
                                id="nik" name="nik" value="{{ old('nik') }}"
-                               placeholder="Masukkan NIK Anda">
+                               placeholder="Masukkan NIK Anda (khusus Non-Admin)">
                     </div>
                     @error('nik')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -74,8 +82,8 @@
                 </div>
             </form>
             <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
-                            <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal
-                        </a>
+                <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal
+            </a>
             <div class="text-center mt-3">
                 <p class="mb-0">Belum punya akun? 
                     <a href="{{ route('register') }}" class="text-decoration-none">Daftar di sini</a>

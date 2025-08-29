@@ -30,6 +30,10 @@ Route::middleware('auth:pengguna')->group(function () {
 
     // Penduduk (hanya admin yang bisa create/edit/delete)
     Route::resource('penduduk', PendudukController::class);
+//    Route::get('/penduduk/multi-create', [PendudukController::class, 'multiCreate'])->name('penduduk.multi.create');
+//    Route::post('/penduduk/multi-store', [PendudukController::class, 'multiStore'])->name('penduduk.multi.store');
+
+
 
     // Profil Pengguna
     Route::get('/profile', [PenggunaController::class, 'show'])->name('user.profile');

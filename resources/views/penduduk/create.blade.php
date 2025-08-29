@@ -1,4 +1,4 @@
-@extends('layoutspenduduk.app')
+{{-- @extends('layoutspenduduk.app')
 
 @section('title', 'Tambah Penduduk - Sistem Informasi Desa')
 
@@ -95,6 +95,9 @@
                     </div></div>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                         <a href="{{ route('penduduk.index') }}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-times me-2"></i>tambah secara cepat
+                        </a>
                         <a href="{{ route('penduduk.index') }}" class="btn btn-secondary me-md-2">
                             <i class="fas fa-times me-2"></i>Batal
                         </a>
@@ -115,4 +118,4 @@ document.getElementById('nik').addEventListener('input', function(e) {
     e.target.value = e.target.value.replace(/\D/g, '').substring(0, 16);
 });
 </script>
-@endsection
+@endsection --}}
