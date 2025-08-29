@@ -57,7 +57,7 @@
                         @foreach($penduduk as $index => $item)
                         <tr>
                             <td>{{ $penduduk->firstItem() + $index }}</td>
-                            <td><code>{{ $item->nik }}</code></td>
+                            <td><code>{{ substr($item->nik, 0, -6) . str_repeat('*', 6) }}</code></td>
                             <td>{{ $item->nama }}</td>
                             <td>
                                 @if($item->jenis_kelamin === 'L')
