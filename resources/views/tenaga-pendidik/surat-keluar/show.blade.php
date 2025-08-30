@@ -31,7 +31,7 @@
                         <th>Perihal</th>
                         <td>{{ Str::limit($suratKeluar->perihalSurat?->deskripsi ?? 'Perihal tidak tersedia', 50) }}</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th>File Surat</th>
                         <td>: 
                             @if($suratKeluar->path)
@@ -49,7 +49,7 @@
                                 <span class="text-muted">Tidak ada file</span>
                             @endif
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>Dibuat Oleh</th>
                         <td>{{ $suratKeluar->creator?->name?? 'pembuat tidak tersedia' }}</td>
@@ -83,7 +83,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    {{-- <div class="col-md-4">
         @if($suratKeluar->path)
             <div class="card">
                 <div class="card-header">
@@ -117,6 +117,6 @@
                 </div>
             </div>
         @endif
-    </div>
+    </div> --}}
 </div>
 @endsection

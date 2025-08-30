@@ -5,8 +5,8 @@
 @section('page-title', 'Dashboard Warga')
 
 @section('content')
-<div class="row mb-4">
-    <div class="col-xl-6 col-md-6 mb-4">
+<div class="row justify-content-md-center">
+    {{-- <div class="col-xl-6 col-md-6 mb-4">
         <div class="card stats-card">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -20,15 +20,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="col-xl-6 col-md-6 mb-4">
         <div class="card stats-card">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-uppercase mb-1">Total Surat Keluar</div>
-                        <div class="h5 mb-0 font-weight-bold">{{ $totalSuratKeluar }}</div>
+                    <div class="col mr-2 items-center">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1 text-center ">Total Permohonan Surat</div>
+                        <div class="h5 mb-0 font-weight-bold text-center">{{ $totalSuratKeluar }}</div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-paper-plane fa-2x text-white-50"></i>

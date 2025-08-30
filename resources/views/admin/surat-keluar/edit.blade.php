@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Surat Keluar')
+@section('title', 'Edit Arsip')
 
 @section('content')
 <div class="container">
-    <h4 class="mb-4">Edit Surat Keluar</h4>
+    <h4 class="mb-4">Edit Arsip</h4>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -47,7 +47,7 @@
             </select>
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label class="form-label">File Surat (opsional)</label>
             <input type="file" name="file_surat" class="form-control">
             @if($suratKeluar->path)
@@ -55,7 +55,7 @@
                     File saat ini: <a href="{{ asset('storage/' . $suratKeluar->path) }}" target="_blank">Lihat File</a>
                 </small>
             @endif
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         <a href="{{ route('admin.surat-keluar.index') }}" class="btn btn-secondary">Batal</a>

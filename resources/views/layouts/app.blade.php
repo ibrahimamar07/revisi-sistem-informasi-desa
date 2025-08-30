@@ -95,14 +95,14 @@
                                     <i class="fas fa-tags me-2"></i> Perihal Surat
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.surat-masuk.*') ? 'active' : '' }}" href="{{ route('admin.surat-masuk.index') }}">
                                     <i class="fas fa-inbox me-2"></i> Surat Masuk
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.surat-keluar.*') ? 'active' : '' }}" href="{{ route('admin.surat-keluar.index') }}">
-                                    <i class="fas fa-paper-plane me-2"></i> Surat Keluar
+                                    <i class="fas fa-paper-plane me-2"></i> Arsip
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -130,25 +130,25 @@
                                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('tenaga-pendidik.surat-masuk.*') ? 'active' : '' }}" href="{{ route('tenaga-pendidik.surat-masuk.index') }}">
                                     <i class="fas fa-inbox me-2"></i> Surat Masuk
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('tenaga-pendidik.surat-keluar.*') ? 'active' : '' }}" href="{{ route('tenaga-pendidik.surat-keluar.index') }}">
-                                    <i class="fas fa-inbox me-2"></i> Surat Keluar
+                                    <i class="fas fa-inbox me-2"></i> Permohonan Surat
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" href="{{ route('laporan.index') }}">
-                                    <i class="fas fa-chart-bar me-2"></i> Laporan
-                                </a>
-                            </li>
-                           <li class="nav-item">
+                                {{-- <li class="nav-item">
+                                    <a class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" href="{{ route('laporan.index') }}">
+                                        <i class="fas fa-chart-bar me-2"></i> Laporan
+                                    </a>
+                                </li> --}}
+                           <li class="nav-item ">
                             <form id="logout-form" method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
-                                <button type="submit" class="nav-link w-100 text-start border-0 bg-transparent" onclick="return confirmLogout(event)">
+                                <button type="submit" class="nav-link w-100 text-start border-0 bg-transparent " onclick="return confirmLogout(event)">
                                     <i class="fas fa-sign-out-alt me-2"></i> Keluar
                                 </button>
                             </form>
@@ -156,10 +156,11 @@
                         @endif
                     </ul>
 
+
                     <hr class="text-white-50">
 
-                    <div class="dropdown">
-                        <a href="" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown">
+                    <div class="">
+                        <a href="" class="d-flex align-items-center text-white text-decoration-none fixed-bottom mb-3 ms-3 " id="dropdownUser1" data-bs-toggle="">
                             <img src="{{ asset('img/profil.jpg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
                             <strong>{{ auth()->user()->name }}</strong>
                         </a>

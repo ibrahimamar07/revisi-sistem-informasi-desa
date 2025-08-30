@@ -47,7 +47,7 @@
             </select>
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label class="form-label">File Surat (opsional)</label>
             <input type="file" name="file_surat" class="form-control">
             @if($suratKeluar->path)
@@ -55,7 +55,7 @@
                     File saat ini: <a href="{{ asset('storage/' . $suratKeluar->path) }}" target="_blank">Lihat File</a>
                 </small>
             @endif
-        </div>
+        </div> --}}
 
         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
         <a href="{{ route('tenaga-pendidik.surat-keluar.index') }}" class="btn btn-secondary">Batal</a>

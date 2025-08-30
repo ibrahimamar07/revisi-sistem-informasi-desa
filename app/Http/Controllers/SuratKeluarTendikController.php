@@ -25,6 +25,24 @@ class SuratKeluarTendikController extends Controller
         });
     }
 
+    if ($request->filled('jumlah_waktu') && $request->filled('tipe_waktu')) {
+    $jumlah = (int) $request->jumlah_waktu;
+    switch ($request->tipe_waktu) {
+        case 'hari':
+            $query->where('tanggal', '>=', now()->subDays( $jumlah));
+            break;
+        case 'minggu':
+            $query->where('tanggal', '>=', now()->subWeeks($jumlah));
+            break;
+        case 'bulan':
+            $query->where('tanggal', '>=', now()->subMonths($jumlah));
+            break;
+        case 'tahun':
+            $query->where('tanggal', '>=', now()->subYears($jumlah));
+            break;
+    }
+}
+
     $suratKeluar = $query->paginate(15)->withQueryString();
 
     return view('tenaga-pendidik.surat-keluar.index', compact('suratKeluar'));
@@ -43,21 +61,21 @@ class SuratKeluarTendikController extends Controller
             'tanggal' => 'required|date',
             'pengirim' => 'required|string|max:255',
             'perihal_surat_id' => 'required|exists:perihal_surat,id',
-            'file_surat' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120', // 5MB max
+            // 'file_surat' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120', // 5MB max
         ]);
 
-        if ($request->hasFile('file_surat')) {
-            $file = $request->file('file_surat');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $validated['path'] = $file->storeAs('surat-keluar', $fileName, 'public');
-        }
+        // if ($request->hasFile('file_surat')) {
+        //     $file = $request->file('file_surat');
+        //     $fileName = time() . '_' . $file->getClientOriginalName();
+        //     $validated['path'] = $file->storeAs('surat-keluar', $fileName, 'public');
+        // }
 
         $validated['created_by'] = auth()->id();
 
         SuratKeluar::create($validated);
 
         return redirect()->route('tenaga-pendidik.surat-keluar.index')
-                        ->with('success', 'Surat keluar berhasil ditambahkan.');
+                        ->with('success', 'Permohonan berhasil ditambahkan.');
     }
 
     public function show(SuratKeluar $suratKeluar)
@@ -79,24 +97,24 @@ class SuratKeluarTendikController extends Controller
             'tanggal' => 'required|date',
             'pengirim' => 'required|string|max:255',
             'perihal_surat_id' => 'required|exists:perihal_surat,id',
-            'file_surat' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
+            // 'file_surat' => 'nullable|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120',
         ]);
 
-        if ($request->hasFile('file_surat')) {
-            // Delete old file
-            if ($suratKeluar->path && Storage::disk('public')->exists($suratKeluar->path)) {
-                Storage::disk('public')->delete($suratKeluar->path);
-            }
+        // if ($request->hasFile('file_surat')) {
+        //     // Delete old file
+        //     if ($suratKeluar->path && Storage::disk('public')->exists($suratKeluar->path)) {
+        //         Storage::disk('public')->delete($suratKeluar->path);
+        //     }
             
-            $file = $request->file('file_surat');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $validated['path'] = $file->storeAs('surat-keluar', $fileName, 'public');
-        }
+        //     $file = $request->file('file_surat');
+        //     $fileName = time() . '_' . $file->getClientOriginalName();
+        //     $validated['path'] = $file->storeAs('surat-keluar', $fileName, 'public');
+        // }
 
         $suratKeluar->update($validated);
 
         return redirect()->route('tenaga-pendidik.surat-keluar.index')
-                        ->with('success', 'Surat keluar berhasil diupdate.');
+                        ->with('success', 'Permohonan Surat berhasil diupdate.');
     }
 
     public function destroy(SuratKeluar $suratKeluar)
@@ -108,7 +126,7 @@ class SuratKeluarTendikController extends Controller
         $suratKeluar->delete();
 
         return redirect()->route('tenaga-pendidik.surat-keluar.index')
-                        ->with('success', 'Surat keluar berhasil dihapus.');
+                        ->with('success', 'Permohonan Surat berhasil dihapus.');
     }
 
     public function download(SuratKeluar $suratKeluar)

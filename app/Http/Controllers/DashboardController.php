@@ -36,11 +36,11 @@ class DashboardController extends Controller
 
     public function tenagaPendidikDashboard()
     {
-        $totalSuratMasuk = SuratMasuk::count();
+        // $totalSuratMasuk = SuratMasuk::count();
         $totalSuratKeluar = SuratKeluar::count();
         
         return view('tenaga-pendidik.dashboard', compact(
-            'totalSuratMasuk', 'totalSuratKeluar'
+            'totalSuratKeluar'// 'totalSuratMasuk', 'totalSuratKeluar'
         ));
     }
 }

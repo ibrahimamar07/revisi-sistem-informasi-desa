@@ -1,8 +1,8 @@
 
 @extends('layouts.app')
 
-@section('title', 'Detail Surat Keluar')
-@section('page-title', 'Detail Surat Keluar')
+@section('title', 'Detail Arsip')
+@section('page-title', 'Detail Arsip')
 
 @section('content')
 <div class="row">
@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">
                 <h6 class="m-0 font-weight-bold">
-                    <i class="fas fa-file-alt me-2"></i>Informasi Surat Keluar
+                    <i class="fas fa-file-alt me-2"></i>Informasi Arsip
                 </h6>
             </div>
             <div class="card-body">
@@ -31,7 +31,7 @@
                         <th>Perihal</th>
                         <td>{{ Str::limit($suratKeluar->perihalSurat?->deskripsi ?? 'Perihal tidak tersedia', 50) }}</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <th>File Surat</th>
                         <td>: 
                             @if($suratKeluar->path)
@@ -49,7 +49,7 @@
                                 <span class="text-muted">Tidak ada file</span>
                             @endif
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>Dibuat Oleh</th>
                         <td>{{ $suratKeluar->creator?->name?? 'pembuat tidak tersedia' }}</td>

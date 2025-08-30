@@ -1,8 +1,8 @@
 
 @extends('layouts.app')
 
-@section('title', 'Tambah Surat Keluar')
-@section('page-title', 'Tambah Surat Keluar')
+@section('title', 'Tambah Arsip')
+@section('page-title', 'Tambah Arsip')
 
 @section('content')
 <div class="row justify-content-center">
@@ -10,7 +10,7 @@
         <div class="card">
             <div class="card-header">
                 <h6 class="m-0 font-weight-bold">
-                    <i class="fas fa-plus me-2"></i>Form Tambah Surat Keluar
+                    <i class="fas fa-plus me-2"></i>Form Tambah Arsip
                 </h6>
             </div>
             <div class="card-body">
@@ -61,7 +61,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="file_surat" class="form-label">File Surat *</label>
                         <input type="file" class="form-control @error('file_surat') is-invalid @enderror" 
                                id="file_surat" name="file_surat" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" required>
@@ -71,7 +71,7 @@
                         @error('file_surat')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('admin.surat-keluar.index') }}" class="btn btn-secondary">

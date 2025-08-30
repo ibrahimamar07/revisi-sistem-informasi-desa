@@ -1,5 +1,3 @@
-/* File: public/js/multi-penduduk.js */
-
 class MultiPendudukForm {
     constructor() {
         this.rowIndex = this.getInitialRowCount();
