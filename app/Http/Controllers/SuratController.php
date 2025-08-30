@@ -11,6 +11,7 @@ class SuratController extends Controller
     {
         return view('laporan.index');
         //nn
+        //nn
     }
 
     public function generate(Request $request)
