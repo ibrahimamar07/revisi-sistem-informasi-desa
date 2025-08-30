@@ -10,6 +10,7 @@ class SuratController extends Controller
     public function form()
     {
         return view('laporan.index');
+        //nn
     }
 
     public function generate(Request $request)
