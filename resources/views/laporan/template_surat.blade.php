@@ -15,7 +15,7 @@
         width: 80px;
         position: absolute;
         left: 50px;
-        top: 20px;
+        top: 60px;
     }
     </style>
 </head>
