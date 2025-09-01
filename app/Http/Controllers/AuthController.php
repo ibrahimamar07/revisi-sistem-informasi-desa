@@ -48,6 +48,31 @@ class AuthController extends Controller
         ])->onlyInput('name');
     }
 
+     public function showRegister()
+    {
+        return view('auth.register');
+    }
+     public function register(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = user::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => $request->password,
+            'role' => 'tenaga_pendidik',
+        ]);
+
+        Auth::login($user);
+
+        return redirect()->route('tenaga-pendidik.dashboard');
+    }
+
+
     public function logout(Request $request)
     {
         Auth::logout();
