@@ -21,22 +21,22 @@
 </head>
 <body>
 <div class="surat">
-   
+
     <div class="kop-surat">
          <img src="https://jelok-kaligesing.id/desa/logo/Logo_kab_Purworejo__sid__q0xzcmT.png" alt="Logo">
         <h3>PEMERINTAH KABUPATEN PURWOREJO</h3>
         <h4>KECAMATAN PITURUH</h4>
         <h5>DESA GUMAWANGREJO</h5>
-        <p><strong> Jl. Brenggong-Kedunggubah Km. 2,5 Kode Pos : 54175</strong></p>
+        <p><strong> Desa Gumawangrejo Rt 01/Rw01 Kode Pos 54263</strong></p>
     </div>
 
-   
+
     <div class="judul-surat">
         SURAT KETERANGAN TIDAK MAMPU <br>
-        <span>No: 010/SKTMS/{{ date('Y') }}</span>
+        <span>No: 400.10.2.4/108/{{ date('Y') }}</span>
     </div>
 
-   
+
     <div class="isi-surat">
         <p>Yang bertanda tangan di bawah ini Kepala Desa Gumawangrejo, Kecamatan Pituruh, Kabupaten Purworejo
             menerangkan dengan sesungguhnya bahwa:</p>
@@ -57,14 +57,14 @@
         <p>Demikian surat keterangan ini dibuat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</p>
     </div>
 
-   
+
     <div class="ttd">
-        <p>Jelok, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+        <p>Gumawangrejo, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
         <p><strong>KEPALA DESA GUMAWANGREJO</strong></p>
         <div class="cap-ttd">SUKIMAN</div>
     </div>
 </div>
 </body>
-</html> 
+</html>
 
 
