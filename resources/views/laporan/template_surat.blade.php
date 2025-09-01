@@ -27,7 +27,7 @@
         <h3>PEMERINTAH KABUPATEN PURWOREJO</h3>
         <h4>KECAMATAN PITURUH</h4>
         <h5>DESA GUMAWANGREJO</h5>
-        <p><strong> Jl. Brenggong-Kedunggubah Km. 2,5 Kode Pos : 54175</strong></p>
+        <p><strong>Desa Gumawangrejo Rt 02/Rw 01 Kode Pos 54263</strong></p>
     </div>
 
    
@@ -59,7 +59,7 @@
 
    
     <div class="ttd">
-        <p>Jelok, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+        <p>GUMAWANGREJO, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
         <p><strong>KEPALA DESA GUMAWANGREJO</strong></p>
         <div class="cap-ttd">SUKIMAN</div>
     </div>
