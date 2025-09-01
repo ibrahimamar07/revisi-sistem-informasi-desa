@@ -31,6 +31,8 @@ Route::prefix('web-a')->name('web-a.')->group(function () {
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register/suratmenyurat', [AuthController::class, 'showRegister'])->name('register.suratmenyurat');
+Route::post('/register/suratmenyurat', [AuthController::class, 'register'])->name('register.submit.suratmenyurat');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //Protected Routes

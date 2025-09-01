@@ -27,7 +27,11 @@
         <h3>PEMERINTAH KABUPATEN PURWOREJO</h3>
         <h4>KECAMATAN PITURUH</h4>
         <h5>DESA GUMAWANGREJO</h5>
+<<<<<<< HEAD
         <p><strong> Desa Gumawangrejo Rt 01/Rw01 Kode Pos 54263</strong></p>
+=======
+        <p><strong>Desa Gumawangrejo Rt 02/Rw 01 Kode Pos 54263</strong></p>
+>>>>>>> 6978c17302a62d30442a1ff06a45d2f18efb163e
     </div>
 
 
@@ -59,7 +63,11 @@
 
 
     <div class="ttd">
+<<<<<<< HEAD
         <p>Gumawangrejo, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+=======
+        <p>GUMAWANGREJO, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+>>>>>>> 6978c17302a62d30442a1ff06a45d2f18efb163e
         <p><strong>KEPALA DESA GUMAWANGREJO</strong></p>
         <div class="cap-ttd">SUKIMAN</div>
     </div>
