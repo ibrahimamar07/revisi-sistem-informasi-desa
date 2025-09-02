@@ -56,6 +56,16 @@
 
 <div class="card">
     <div class="card-body">
+    <div class="btn-group">
+        <a href="{{ route('penduduk.export') }}" class="btn btn-success">
+            <i class="fas fa-file-excel me-2"></i>Ekspor Data
+        </a>
+        <a href="{{ route('penduduk.show-import') }}" class="btn btn-info text-white">
+            <i class="fas fa-file-import me-2"></i>Impor Data
+        </a>
+    </div>
+</div>
+
         <form method="POST" action="{{ route('penduduk.store') }}" id="multi-penduduk-form">
             @csrf
             <table class="table table-bordered" id="penduduk-table">

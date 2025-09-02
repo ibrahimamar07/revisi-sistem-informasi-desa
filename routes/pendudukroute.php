@@ -29,7 +29,15 @@ Route::middleware('auth:pengguna')->group(function () {
     Route::get('/dashboard', [DashboardNewController::class, 'index'])->name('dashboard');
 
     // Penduduk (hanya admin yang bisa create/edit/delete)
+    Route::get('penduduk/export', [PendudukController::class, 'export'])->name('penduduk.export')->middleware('admin');
+    Route::get('penduduk/import', [PendudukController::class, 'showImport'])->name('penduduk.show-import')->middleware('admin');
+    Route::get('penduduk/template', [PendudukController::class, 'template'])->name('penduduk.template')->middleware('admin');
+     Route::get('penduduk/guideimpor', [PendudukController::class, 'guideimpor'])->name('penduduk.guideimpor')->middleware('admin');
+
+    Route::post('penduduk/import', [PendudukController::class, 'import'])->name('penduduk.import')->middleware('admin');
     Route::resource('penduduk', PendudukController::class);
+    
+
 //    Route::get('/penduduk/multi-create', [PendudukController::class, 'multiCreate'])->name('penduduk.multi.create');
 //    Route::post('/penduduk/multi-store', [PendudukController::class, 'multiStore'])->name('penduduk.multi.store');
 
