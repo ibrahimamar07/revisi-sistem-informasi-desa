@@ -59,7 +59,7 @@
 
    
     <div class="ttd">
-        <p>GUMAWANGREJO, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
+        <p>Gumawangrejo, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}</p>
         <p><strong>KEPALA DESA GUMAWANGREJO</strong></p>
         <div class="cap-ttd">SUKIMAN</div>
     </div>
