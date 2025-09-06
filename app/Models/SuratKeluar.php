@@ -13,7 +13,7 @@ class SuratKeluar extends Model
     protected $table = 'surat_keluar';
 
     protected $fillable = [
-        'no_surat', 'tanggal', 'pengirim', 'perihal_surat_id', 'path', 'created_by'
+         'no_surat','tanggal', 'pengirim', 'perihal_surat_id', 'path', 'created_by','status'
     ];
 
     protected $casts = [
@@ -23,6 +23,10 @@ class SuratKeluar extends Model
     public function perihalSurat()
     {
         return $this->belongsTo(PerihalSurat::class, 'perihal_surat_id');
+    }
+
+    public function noSurat(){
+        return $this->belongsTo(PerihalSurat::class,'no_surat','id');
     }
 
     public function creator()

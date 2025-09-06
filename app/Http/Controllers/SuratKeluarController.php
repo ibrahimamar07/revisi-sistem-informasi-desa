@@ -59,12 +59,21 @@ class SuratKeluarController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'no_surat' => 'required|string|max:255|unique:surat_keluar',
+            // 'no_surat' => 'exists:perihal_surat,id',
             'tanggal' => 'required|date',
             'pengirim' => 'required|string|max:255',
             'perihal_surat_id' => 'required|exists:perihal_surat,id',
             // 'file_surat' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120', // 5MB max
         ]);
+
+         // Find the PerihalSurat model using the ID from the request
+        $perihalSurat = PerihalSurat::find($request->perihal_surat_id);
+
+        // Add the no_surat from the found model to the validated data
+        // This prevents the "Attempt to read property..." error
+        $validated['no_surat'] = $perihalSurat->id;
+
+
 
         // if ($request->hasFile('file_surat')) {
         //     $file = $request->file('file_surat');
@@ -95,7 +104,7 @@ class SuratKeluarController extends Controller
     public function update(Request $request, SuratKeluar $suratKeluar)
     {
         $validated = $request->validate([
-            'no_surat' => 'required|string|max:255|unique:surat_keluar,no_surat,' . $suratKeluar->id,
+            // 'no_surat' => 'required|string|max:255|unique:surat_keluar,no_surat,' . $suratKeluar->id,
             'tanggal' => 'required|date',
             'pengirim' => 'required|string|max:255',
             'perihal_surat_id' => 'required|exists:perihal_surat,id',
@@ -139,4 +148,32 @@ class SuratKeluarController extends Controller
 
 //         return redirect()->back()->with('error', 'File tidak ditemukan.');
 //     }
+
+public function approve(SuratKeluar $suratKeluar)
+{
+    // Cek status saat ini
+    if ($suratKeluar->status === 'disetujui' || $suratKeluar->status === 'ditolak') {
+        return redirect()->back()->with('error', 'Status surat sudah dikonfirmasi dan tidak dapat diubah.');
+    }
+    
+    // Perbarui status menjadi 'disetujui'
+    $suratKeluar->status = 'disetujui';
+    $suratKeluar->save();
+
+    return redirect()->back()->with('success', 'Surat berhasil disetujui.');
+}
+
+public function reject(SuratKeluar $suratKeluar)
+{
+    // Cek status saat ini
+    if ($suratKeluar->status === 'disetujui' || $suratKeluar->status === 'ditolak') {
+        return redirect()->back()->with('error', 'Status surat sudah dikonfirmasi dan tidak dapat diubah.');
+    }
+    
+    // Perbarui status menjadi 'ditolak'
+    $suratKeluar->status = 'ditolak';
+    $suratKeluar->save();
+
+    return redirect()->back()->with('success', 'Surat berhasil ditolak.');
+}
 }

@@ -18,6 +18,14 @@
                     @csrf
                     
                     <div class="mb-3">
+                        <label for="no_surat" class="form-label">No. Surat *</label>
+                        <input type="text" class="form-control @error('no_surat') is-invalid @enderror" 
+                               id="no_surat" name="no_surat" value="{{ old('no_surat') }}" required>
+                        @error('no_surat')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi Perihal *</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
                                   id="deskripsi" name="deskripsi" rows="4" required>{{ old('deskripsi') }}</textarea>

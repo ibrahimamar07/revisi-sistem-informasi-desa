@@ -11,7 +11,7 @@ class PerihalSurat extends Model
     protected $table = 'perihal_surat';
     
     protected $fillable = [
-        'deskripsi'
+        'deskripsi','no_surat'
     ];
 
     public function suratMasuk()
@@ -19,6 +19,9 @@ class PerihalSurat extends Model
         return $this->hasMany(SuratMasuk::class, 'perihal_surat_id');
     }
 
+    public function noSurat(){
+        return $this->hasMany(SuratKeluar::class,'no_surat','id');
+    }
     public function suratKeluar()
     {
         return $this->hasMany(SuratKeluar::class, 'perihal_surat_id');

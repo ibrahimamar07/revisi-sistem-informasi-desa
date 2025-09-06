@@ -23,6 +23,10 @@
             <label for="deskripsi" class="form-label">Deskripsi Perihal Surat</label>
             <input type="text" name="deskripsi" class="form-control" value="{{ old('deskripsi', $perihalSurat->deskripsi) }}" required>
         </div>
+        <div class="mb-3">
+            <label for="no_surat" class="form-label">No surat</label>
+            <input type="text" name="no_surat" class="form-control" value="{{ old('nosurat', $perihalSurat->no_surat) }}" required>
+        </div> 
 
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('admin.perihal-surat.index') }}" class="btn btn-secondary">Batal</a>

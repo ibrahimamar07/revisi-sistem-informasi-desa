@@ -11,6 +11,8 @@
         <div class="card-body">
             <h5 class="card-title">Deskripsi Perihal</h5>
             <p class="card-text">{{ $perihalSurat->deskripsi }}</p>
+            <h5 class="card-title">No surat</h5>
+            <p class="card-text">{{ $perihalSurat->no_surat }}</p>
         </div>
     </div>
 
