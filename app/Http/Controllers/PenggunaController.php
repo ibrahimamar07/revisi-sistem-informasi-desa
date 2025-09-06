@@ -44,5 +44,6 @@ class PenggunaController extends Controller
         $user->save();
 
         return redirect()->route('user.profile')->with('success', 'Profil berhasil diperbarui.');
+        
     }
 }

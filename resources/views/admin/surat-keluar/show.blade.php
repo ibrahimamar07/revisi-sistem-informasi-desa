@@ -17,7 +17,7 @@
                 <table class="table table-borderless">
                     <tr>
                         <th width="30%">No. Surat</th>
-                        <td>: {{ $suratKeluar->no_surat }}</td>
+                        <td>: {{ $suratKeluar->perihalSurat?->no_surat ?? 'no surat belum ada' }}</td>
                     </tr>
                     <tr>
                         <th>Tanggal</th>
@@ -68,7 +68,7 @@
                         <a href="{{ route('admin.surat-keluar.edit', $suratKeluar) }}" class="btn btn-warning">
                             <i class="fas fa-edit me-2"></i>Edit
                         </a>
-                        <form action="{{ route('admin.surat-keluar.destroy', $suratKeluar) }}" 
+                        {{-- <form action="{{ route('admin.surat-keluar.destroy', $suratKeluar) }}" 
                               method="POST" class="d-inline ms-2">
                             @csrf
                             @method('DELETE')
@@ -76,7 +76,7 @@
                                     onclick="return confirm('Yakin ingin menghapus?')">
                                 <i class="fas fa-trash me-2"></i>Hapus
                             </button>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>

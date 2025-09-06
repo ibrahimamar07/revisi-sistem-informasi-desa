@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('penduduk', function (Blueprint $table) {
-             $table->integer('nik', 16)->unique()->change();
+        Schema::table('perihal_surat', function (Blueprint $table) {
+          $table->string('no_surat')->unique()->nullable();
         });
     }
 
@@ -21,9 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('penduduk', function (Blueprint $table) {
+        Schema::table('perihal_surat', function (Blueprint $table) {
             //
-              $table->integer('nik', 16)->unique()->change();
+            $table->dropColumn('no_surat');
         });
     }
 };
