@@ -105,14 +105,14 @@
                             <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal
                         </a>
                         <div class="text-center mt-3">
-                        <p class="mb-0">Belum punya akun? 
+                        <p class="mb-0">Belum punya akun?
                             <a href="{{ route('register.suratmenyurat') }}" class="text-decoration-none">Daftar di sini</a>
                         </p>
                         </form>
 
                         <div class="text-center mt-4">
                             <small class="text-muted">
-                                © 2024 Pemerintah Desa Gumawangrejo
+                                © 2025 Pemerintah Desa Gumawangrejo
                             </small>
                         </div>
                     </div>

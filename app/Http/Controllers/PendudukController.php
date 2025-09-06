@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Penduduk;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PendudukImport;
+use App\Exports\PendudukExport;
+use Maatwebsite\Excel\Validators\ValidationException; // Pastikan ini ada
+
 
 class PendudukController extends Controller
 {
@@ -26,13 +31,13 @@ class PendudukController extends Controller
         return view('penduduk.multi-create');
     }
 
-    public function store(Request $request)
+     public function store(Request $request)
     {
         // kanggo debug ojo dihapus
         Log::info('Request data:', $request->all());
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
-            'penduduk.*.nik' => 'required|string|size:16|unique:penduduk,nik',
+            'penduduk.*.nik' => 'required|string|size:16|unique:penduduk,nik|regex:/^[0-9]+$/',
             'penduduk.*.nama' => 'required|string|max:255',
             'penduduk.*.jenis_kelamin' => 'required|in:L,P',
             'penduduk.*.agama' => 'required|string|max:50',
@@ -152,4 +157,66 @@ class PendudukController extends Controller
         $penduduk->delete();
         return redirect()->route('penduduk.index')->with('success', 'Data penduduk berhasil dihapus.');
     }
+
+    public function showImport()
+    {
+        return view('penduduk.import');
+    }
+
+  /**
+     * Memproses import file Excel dalam transaction.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx|max:10240',
+        ]);
+        
+        // Letakkan seluruh proses impor di dalam blok transaction
+        DB::beginTransaction();
+        try {
+            Excel::import(new PendudukImport, $request->file('file'));
+            DB::commit(); // Commit jika berhasil semua
+
+            return redirect()->route('penduduk.index')->with('success', 'Data penduduk berhasil diimpor.');
+            
+        } catch (ValidationException $e) {
+            DB::rollback(); // Rollback jika ada validasi yang gagal
+            $failures = $e->failures();
+            
+            $errors = [];
+            foreach ($failures as $failure) {
+                $errors[] = "Baris {$failure->row()}, Kolom '{$failure->attribute()}': {$failure->errors()[0]}";
+            }
+            
+            return back()->with('import_errors', $errors)->withInput();
+            
+        } catch (\Exception $e) {
+            DB::rollback(); // Rollback jika ada error lainnya
+            Log::error('Error importing penduduk data: ' . $e->getMessage());
+            return back()->with('error', 'Terjadi kesalahan saat mengimpor data. ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Mengekspor data penduduk ke file Excel.
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function export()
+    {
+        $fileName = 'data-penduduk-' . date('Ymd-His') . '.xlsx';
+        return Excel::download(new PendudukExport, $fileName);
+    }
+
+   public function template()
+{
+    $fileName = 'template-impor-' . date('Ymd-His') . '.xlsx';
+    $filePath = storage_path('app/public/template/data-penduduk-20250902-161352.xlsx');
+    return response()->download($filePath, $fileName);
+}
+public function guideimpor(){
+    return view('penduduk.guideimpor');
+}
 }
