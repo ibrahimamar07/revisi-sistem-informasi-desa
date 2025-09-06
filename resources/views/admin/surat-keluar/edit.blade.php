@@ -20,10 +20,10 @@
         @csrf
         @method('PUT')
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="no_surat" class="form-label">No. Surat</label>
             <input type="text" name="no_surat" class="form-control" value="{{ old('no_surat', $suratKeluar->no_surat) }}" required>
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="tanggal" class="form-label">Tanggal</label>

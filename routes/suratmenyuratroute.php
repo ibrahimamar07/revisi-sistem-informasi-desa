@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
             // Surat Keluar
             Route::resource('surat-keluar', SuratKeluarController::class);
             Route::get('surat-keluar/{suratKeluar}/download', [SuratKeluarController::class, 'download'])->name('surat-keluar.download');
+             Route::post('/{suratKeluar}/approve', [SuratKeluarController::class, 'approve'])->name('approve');
+            Route::post('/{suratKeluar}/reject', [SuratKeluarController::class, 'reject'])->name('reject');
 
             // Users Management
             Route::resource('users', UserController::class);

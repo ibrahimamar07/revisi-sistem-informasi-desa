@@ -103,6 +103,19 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.surat-keluar.*') ? 'active' : '' }}" href="{{ route('admin.surat-keluar.index') }}">
                                     <i class="fas fa-paper-plane me-2"></i> Arsip
+                                    @if( $permohonanSuratBelumDikonfirmasi > 0)
+                                        <span class="badge bg-warning ms-2">{{  $permohonanSuratBelumDikonfirmasi }}</span>
+                                         {{-- <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span> --}}
+                                    @endif
+
+                                     {{-- @if( $permohonanSuratDitolak > 0)
+                                         <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span>
+                                    @endif
+
+                                     @if( $permohonanSuratDisetujui > 0)
+                                         <span class="badge bg-success ms-2">{{  $permohonanSuratDisetujui }}</span>
+                                    @endif --}}
+                                    
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -138,6 +151,13 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('tenaga-pendidik.surat-keluar.*') ? 'active' : '' }}" href="{{ route('tenaga-pendidik.surat-keluar.index') }}">
                                     <i class="fas fa-inbox me-2"></i> Permohonan Surat
+                                     @if( $permohonanSuratDitolak > 0)
+                                         <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span>
+                                    @endif
+                                    @if( $permohonanSuratDisetujui > 0)
+                                         <span class="badge bg-success ms-1">{{  $permohonanSuratDisetujui }}</span>
+                                    @endif
+                                   
                                 </a>
                             </li>
                                 {{-- <li class="nav-item">

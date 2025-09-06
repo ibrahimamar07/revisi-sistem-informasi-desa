@@ -57,13 +57,14 @@
                         {{-- <th>File</th>
                         <th>Dibuat Oleh</th> --}}
                         <th width="15%">Aksi</th>
+                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($suratKeluar as $index => $surat)
                     <tr>
                         <td>{{ $suratKeluar->firstItem() + $index }}</td>
-                        <td>{{ $surat->no_surat }}</td>
+                        <td>{{ $surat->perihalSurat?->no_surat ?? 'no surat belum ada'}}</td>
                         <td>{{ $surat->tanggal->format('d/m/Y') }}</td>
                         <td>{{ $surat->pengirim }}</td>
                        <td>{{ Str::limit($surat->perihalSurat?->deskripsi ?? 'Perihal tidak tersedia', 25) }}</td>
@@ -100,6 +101,17 @@
                                     </button>
                                 </form>
                             </div>
+                        </td>
+                        <td>
+                            @if ( $surat->status=='disetujui')
+                                  <span class="badge bg-success">Disetujui</span>
+                            @elseif ($surat->status=='ditolak')
+                             <span class="badge bg-danger">Ditolak</span>
+                              @elseif ($surat->status=='belum_dikonfirmasi')
+                             <span class="badge bg-warning">Belum Dikonfirmasi</span>
+                            @endif
+                            
+                        
                         </td>
                     </tr>
                     @empty

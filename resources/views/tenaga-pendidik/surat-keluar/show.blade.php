@@ -17,7 +17,7 @@
                 <table class="table table-borderless">
                     <tr>
                         <th width="30%">No. Surat</th>
-                        <td>: {{ $suratKeluar->no_surat }}</td>
+                        <td>: {{ $suratKeluar->perihalSurat?->no_surat?? 'no surat belum ada' }}</td>
                     </tr>
                     <tr>
                         <th>Tanggal</th>

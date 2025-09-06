@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::table('surat_keluar', function (Blueprint $table) {
+         $table->foreign('no_surat')->references('id')->on('perihal_surat');
+
+            
+        });
     }
 
     /**
@@ -19,6 +23,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('surat_keluar', function (Blueprint $table) {
+            //
+            $table->dropForeign(['no_surat']);
+        });
     }
 };

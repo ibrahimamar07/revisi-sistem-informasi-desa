@@ -57,7 +57,7 @@ class SuratKeluarTendikController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'no_surat' => 'required|string|max:255|unique:surat_keluar',
+            // 'no_surat' => 'required|string|max:255|unique:surat_keluar',
             'tanggal' => 'required|date',
             'pengirim' => 'required|string|max:255',
             'perihal_surat_id' => 'required|exists:perihal_surat,id',
@@ -93,7 +93,7 @@ class SuratKeluarTendikController extends Controller
     public function update(Request $request, SuratKeluar $suratKeluar)
     {
         $validated = $request->validate([
-            'no_surat' => 'required|string|max:255|unique:surat_keluar,no_surat,' . $suratKeluar->id,
+            // 'no_surat' => 'required|string|max:255|unique:surat_keluar,no_surat,' . $suratKeluar->id,
             'tanggal' => 'required|date',
             'pengirim' => 'required|string|max:255',
             'perihal_surat_id' => 'required|exists:perihal_surat,id',
