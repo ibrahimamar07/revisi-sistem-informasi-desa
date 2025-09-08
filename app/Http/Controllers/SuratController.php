@@ -12,7 +12,7 @@ class SuratController extends Controller
         return view('laporan.index');
         //nn
         //nn
-       // pp
+        // pp
     }
 
     public function generate(Request $request)
@@ -27,19 +27,18 @@ class SuratController extends Controller
             'alamat' => 'required|string',
         ]);
 
-       $pdf = Pdf::loadView('laporan.template_surat', $data)->setPaper('A4');
+        $pdf = Pdf::loadView('laporan.template_surat', $data)->setPaper('A4');
 
-    ob_end_clean();
+        ob_end_clean();
 
-    $fileName = 'surat_'.$data['nama'].'_'.time().'.pdf';
+        $fileName = 'surat_' . $data['nama'] . '_' . time() . '.pdf';
 
-    return response($pdf->output(), 200, [
-        'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
-        'Cache-Control' => 'no-cache, must-revalidate',
-        'Pragma' => 'no-cache',
-        'Expires' => '0',
-    ]);
+        return response($pdf->output(), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+            'Cache-Control' => 'no-cache, must-revalidate',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
     }
 }
-

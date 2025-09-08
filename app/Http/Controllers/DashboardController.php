@@ -16,21 +16,24 @@ class DashboardController extends Controller
         $totalSuratKeluar = SuratKeluar::count();
         $suratMasukBulanIni = SuratMasuk::whereMonth('created_at', Carbon::now()->month)->count();
         $suratKeluarBulanIni = SuratKeluar::whereMonth('created_at', Carbon::now()->month)->count();
-        
+
         $suratMasukTerbaru = SuratMasuk::with(['perihalSurat', 'creator'])
-                                       ->latest()
-                                       ->take(2)
-                                       ->get();
-        
+            ->latest()
+            ->take(2)
+            ->get();
+
         $suratKeluarTerbaru = SuratKeluar::with(['perihalSurat', 'creator'])
-                                         ->latest()
-                                         ->take(2)
-                                         ->get();
+            ->latest()
+            ->take(2)
+            ->get();
 
         return view('admin.dashboard', compact(
-            'totalSuratMasuk', 'totalSuratKeluar', 
-            'suratMasukBulanIni', 'suratKeluarBulanIni',
-            'suratMasukTerbaru', 'suratKeluarTerbaru'
+            'totalSuratMasuk',
+            'totalSuratKeluar',
+            'suratMasukBulanIni',
+            'suratKeluarBulanIni',
+            'suratMasukTerbaru',
+            'suratKeluarTerbaru'
         ));
     }
 
@@ -38,9 +41,9 @@ class DashboardController extends Controller
     {
         // $totalSuratMasuk = SuratMasuk::count();
         $totalSuratKeluar = SuratKeluar::count();
-        
+
         return view('tenaga-pendidik.dashboard', compact(
-            'totalSuratKeluar'// 'totalSuratMasuk', 'totalSuratKeluar'
+            'totalSuratKeluar' // 'totalSuratMasuk', 'totalSuratKeluar'
         ));
     }
 }
