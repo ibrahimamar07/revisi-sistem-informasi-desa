@@ -36,6 +36,7 @@
                             <th>Jenis Kelamin</th>
                             <th>Alamat & Tanggal Lahir</th>
                             <th>Agama</th>
+                            <th>Status</th>
                             @if(Auth::guard('pengguna')->user()->isAdmin())
                             <th>Aksi</th>
                             @endif
@@ -63,6 +64,9 @@
                         </td>
                         <td>
                             <small class="text-muted">{{ Str::limit($item->agama,10) }}</small>
+                        </td>
+                        <td>
+                            <small class="text-muted">{{ Str::limit($item->status,10) }}</small>
                         </td>
                         @if(Auth::guard('pengguna')->user()->isAdmin())
                         <td>
