@@ -23,7 +23,7 @@
 <div class="surat">
    
     <div class="kop-surat">
-         <img src="https://jelok-kaligesing.id/desa/logo/Logo_kab_Purworejo__sid__q0xzcmT.png" alt="Logo">
+        <img src="{{ public_path('img/Logo_kab_Purworejo.png') }}" alt="Logo">
         <h3>PEMERINTAH KABUPATEN PURWOREJO</h3>
         <h4>KECAMATAN PITURUH</h4>
         <h5>DESA GUMAWANGREJO</h5>

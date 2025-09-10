@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
+
 class SuratController extends Controller
 {
     public function form()
@@ -28,7 +29,6 @@ class SuratController extends Controller
         ]);
 
        $pdf = Pdf::loadView('laporan.template_surat', $data)->setPaper('A4');
-
     ob_end_clean();
 
     $fileName = 'surat_'.$data['nama'].'_'.time().'.pdf';

@@ -90,6 +90,21 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
+                            <select class="form-select @error('status') is-invalid @enderror" 
+                                    id="status" name="status" required>
+                                <option value="">Pilih status</option>
+                                <option value="hidup" {{ old('status', $penduduk->status) == 'aktif' ? 'selected' : '' }}>Hidup</option>
+                                <option value="pindah" {{ old('status', $penduduk->status) == 'pindah' ? 'selected' : '' }}>Pindah</option>
+                                 <option value="meninggal" {{ old('status', $penduduk->status) == 'meninggal' ? 'selected' : '' }}>Meninggal</option>
+                            </select>
+                            @error('status')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                     <div class="mb-3">
                         <label for="alamat_tanggallahir" class="form-label">Alamat & Tanggal Lahir <span class="text-danger">*</span></label>
                         <textarea class="form-control @error('alamat_tanggallahir') is-invalid @enderror" 

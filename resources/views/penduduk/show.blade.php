@@ -67,8 +67,10 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 mb-4">
-                        <h6 class="text-muted mb-3">Alamat & Tanggal Lahir</h6>
+                     <div class="mb-3">
+                                <label class="form-label text-muted">Status</label>
+                                <div class="fw-bold fs-5">{{ $penduduk->status }}</div>
+                            </div>
                         
                         <div class="mb-3">
                             <label class="form-label text-muted">Alamat & Tanggal Lahir</label>
