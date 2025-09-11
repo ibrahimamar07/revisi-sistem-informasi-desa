@@ -10,7 +10,7 @@ class SuratKeluar extends Model
 
     protected $fillable = [
         'no_surat',
-        'id_perihal',
+        'perihal_surat_id',
         'nama',
         'nik',
         'ttl',
@@ -29,7 +29,7 @@ class SuratKeluar extends Model
     // Relasi ke perihal_surat
     public function perihal()
     {
-        return $this->belongsTo(PerihalSurat::class, 'id_perihal');
+        return $this->belongsTo(PerihalSurat::class, 'perihal_surat_id');
     }
 
     // Relasi ke user yang membuat surat
