@@ -16,7 +16,8 @@ class Penduduk extends Model
         'nama',
         'alamat_tanggallahir',
         'jenis_kelamin',
-        'agama'
+        'agama',
+        'status'
     ];
 
     public function getJenisKelaminLengkapAttribute()

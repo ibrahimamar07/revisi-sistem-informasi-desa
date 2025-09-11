@@ -145,6 +145,7 @@ class PendudukController extends Controller
             'alamat_tanggallahir' => 'required|string',
             'jenis_kelamin' => 'required|in:L,P',
             'agama' => 'required|string|max:255',
+            'status'=> 'required',
         ]);
 
         $penduduk->update($request->all());
