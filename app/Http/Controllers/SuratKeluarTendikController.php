@@ -46,6 +46,7 @@ class SuratKeluarTendikController extends Controller
     $suratKeluar = $query->paginate(15)->withQueryString();
 
     return view('tenaga-pendidik.surat-keluar.index', compact('suratKeluar'));
+    
 }
 
     public function create()
