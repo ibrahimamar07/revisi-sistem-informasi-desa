@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class PenggunaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:pengguna');
-        $this->middleware('admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:pengguna');
+    //     $this->middleware('role:admin')->except(['index', 'show']);
+    // }
 
     public function show()
     {

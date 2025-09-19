@@ -101,8 +101,8 @@
                                 <i class="fas fa-sign-in-alt me-2"></i>LOGIN
                             </button>
 
-                            <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
-                            <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal
+                            {{-- <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
+                            <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal --}}
                         </a>
                         </form>
 

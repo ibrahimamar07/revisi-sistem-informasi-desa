@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class PendudukController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:pengguna');
-        $this->middleware('admin')->except(['index', 'show']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:pengguna');
+    //     $this->middleware('admin')->except(['index', 'show']);
+    // }
 
     public function index()
     {

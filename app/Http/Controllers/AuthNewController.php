@@ -13,10 +13,15 @@ class AuthNewController extends Controller
     public function showLogin()
 {
     if (Auth::guard('pengguna')->check()) {
-        return redirect('/dashboard');
+        return redirect('/portal');
     }
     return view('authnew.login');
 }
+    public function showportal()
+    {
+        
+        return view('portal.portal');
+    }
 
     public function login(Request $request)
     {
@@ -30,7 +35,7 @@ class AuthNewController extends Controller
 
         if (Auth::guard('pengguna')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/portal');
         }
 
         return back()->withErrors([
@@ -66,7 +71,7 @@ class AuthNewController extends Controller
 
         Auth::guard('pengguna')->login($pengguna);
 
-        return redirect('/dashboard');
+        return redirect('/portal');
     }
 
     public function logout(Request $request)

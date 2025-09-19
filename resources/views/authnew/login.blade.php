@@ -81,9 +81,9 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
+            {{-- <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
                 <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal
-            </a>
+            </a> --}}
             <div class="text-center mt-3">
                 <p class="mb-0">Belum punya akun? 
                     <a href="{{ route('register') }}" class="text-decoration-none">Daftar di sini</a>

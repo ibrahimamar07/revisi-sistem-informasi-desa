@@ -60,7 +60,7 @@
                 </div>
                 <h4 class="fw-bold">Data Kependudukan</h4>
                 <p class="text-muted">Akses dan kelola data penduduk secara digital dan terpusat.</p>
-                <a href="{{ url('web-b') }}" class="btn btn-success btn-custom">
+                <a href="{{route("dashboard") }}" class="btn btn-success btn-custom">
                     <i class="fas fa-sign-in-alt me-1"></i> Masuk Ke Web
                 </a>
             </div>
