@@ -1,8 +1,8 @@
 
 @extends('layouts.app')
 
-@section('title', 'Tambah Surat Keluar')
-@section('page-title', 'Tambah Surat Keluar')
+@section('title', 'Tambah Permohonan Surat')
+@section('page-title', 'Tambah Permohonan Surat')
 
 @section('content')
 <div class="row justify-content-center">

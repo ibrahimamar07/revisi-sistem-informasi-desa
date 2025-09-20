@@ -2,34 +2,37 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class SuratKeluar extends Model
 {
-    use HasFactory;
-
     protected $table = 'surat_keluar';
 
     protected $fillable = [
-         'no_surat','tanggal', 'pengirim', 'perihal_surat_id', 'path', 'created_by','status', 'nama_kades'
-    ];
 
+         'no_surat','tanggal', 'pengirim', 'perihal_surat_id', 'path', 'created_by','status', 'nama_kades'
+ 
+    ];
     protected $casts = [
         'tanggal' => 'date',
     ];
 
-    public function perihalSurat()
+
+    // Relasi ke perihal_surat
+    public function perihal()
     {
         return $this->belongsTo(PerihalSurat::class, 'perihal_surat_id');
     }
+
 
     public function noSurat(){
         return $this->belongsTo(PerihalSurat::class,'no_surat','id');
     }
 
     public function kepalaDesa()
+
+    // Relasi ke user yang membuat surat
+    
     {
         return $this->belongsTo(KepalaDesa::class, 'nama_kades');
     }
@@ -48,35 +51,5 @@ class SuratKeluar extends Model
      public function creator()
     {
         return $this->belongsTo(Pengguna::class, 'created_by');
-    }
-
-    public function getFileNameAttribute()
-    {
-        return basename($this->path);
-    }
-
-    public function getFileUrlAttribute()
-    {
-        return Storage::url($this->path);
-    }
-
-    public function getFileSizeAttribute()
-    {
-        if (Storage::exists($this->path)) {
-            return Storage::size($this->path);
-        }
-        return 0;
-    }
-
-    public function getFormattedFileSizeAttribute()
-    {
-        $bytes = $this->file_size;
-        $units = ['B', 'KB', 'MB', 'GB'];
-        
-        for ($i = 0; $bytes > 1024; $i++) {
-            $bytes /= 1024;
-        }
-        
-        return round($bytes, 2) . ' ' . $units[$i];
     }
 }

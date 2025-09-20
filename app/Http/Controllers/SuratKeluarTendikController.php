@@ -10,44 +10,42 @@ use Illuminate\Support\Facades\Storage;
 class SuratKeluarTendikController extends Controller
 {
     public function index(Request $request)
-{
-    $query = SuratKeluar::with(['perihalSurat', 'creator'])->latest();
+    {
+        $query = SuratKeluar::with(['perihalSurat', 'creator'])->latest();
 
-    if ($request->filled('q')) {
-        $search = $request->q;
-        $query->where(function ($q) use ($search) {
-            $q->where('no_surat', 'like', "%$search%")
-              ->orWhere('pengirim', 'like', "%$search%")
-              ->orWhereDate('tanggal', $search)
-              ->orWhereHas('perihalSurat', function ($q2) use ($search) {
-                  $q2->where('deskripsi', 'like', "%$search%");
-              });
-        });
+        if ($request->filled('q')) {
+            $search = $request->q;
+            $query->where(function ($q) use ($search) {
+                $q->where('no_surat', 'like', "%$search%")
+                    ->orWhere('pengirim', 'like', "%$search%")
+                    ->orWhereDate('tanggal', $search)
+                    ->orWhereHas('perihalSurat', function ($q2) use ($search) {
+                        $q2->where('deskripsi', 'like', "%$search%");
+                    });
+            });
+        }
+
+        if ($request->filled('jumlah_waktu') && $request->filled('tipe_waktu')) {
+            $jumlah = (int) $request->jumlah_waktu;
+            switch ($request->tipe_waktu) {
+                case 'hari':
+                    $query->where('tanggal', '>=', now()->subDays($jumlah));
+                    break;
+                case 'minggu':
+                    $query->where('tanggal', '>=', now()->subWeeks($jumlah));
+                    break;
+                case 'bulan':
+                    $query->where('tanggal', '>=', now()->subMonths($jumlah));
+                    break;
+                case 'tahun':
+                    $query->where('tanggal', '>=', now()->subYears($jumlah));
+                    break;
+            }
+        }
+
+        $suratKeluar = $query->paginate(15)->withQueryString();
+        return view('tenaga-pendidik.surat-keluar.index', compact('suratKeluar'));
     }
-
-    if ($request->filled('jumlah_waktu') && $request->filled('tipe_waktu')) {
-    $jumlah = (int) $request->jumlah_waktu;
-    switch ($request->tipe_waktu) {
-        case 'hari':
-            $query->where('tanggal', '>=', now()->subDays( $jumlah));
-            break;
-        case 'minggu':
-            $query->where('tanggal', '>=', now()->subWeeks($jumlah));
-            break;
-        case 'bulan':
-            $query->where('tanggal', '>=', now()->subMonths($jumlah));
-            break;
-        case 'tahun':
-            $query->where('tanggal', '>=', now()->subYears($jumlah));
-            break;
-    }
-}
-
-    $suratKeluar = $query->paginate(15)->withQueryString();
-
-    return view('tenaga-pendidik.surat-keluar.index', compact('suratKeluar'));
-    
-}
 
     public function create()
     {
@@ -76,7 +74,7 @@ class SuratKeluarTendikController extends Controller
         SuratKeluar::create($validated);
 
         return redirect()->route('tenaga-pendidik.surat-keluar.index')
-                        ->with('success', 'Permohonan berhasil ditambahkan.');
+            ->with('success', 'Permohonan berhasil ditambahkan.');
     }
 
     public function show(SuratKeluar $suratKeluar)
@@ -106,7 +104,7 @@ class SuratKeluarTendikController extends Controller
         //     if ($suratKeluar->path && Storage::disk('public')->exists($suratKeluar->path)) {
         //         Storage::disk('public')->delete($suratKeluar->path);
         //     }
-            
+
         //     $file = $request->file('file_surat');
         //     $fileName = time() . '_' . $file->getClientOriginalName();
         //     $validated['path'] = $file->storeAs('surat-keluar', $fileName, 'public');
@@ -115,8 +113,9 @@ class SuratKeluarTendikController extends Controller
         $suratKeluar->update($validated);
 
         return redirect()->route('tenaga-pendidik.surat-keluar.index')
-                        ->with('success', 'Permohonan Surat berhasil diupdate.');
+            ->with('success', 'Permohonan Surat berhasil diupdate.');
     }
+
 
     // public function destroy(SuratKeluar $suratKeluar)
     // {
@@ -133,7 +132,10 @@ class SuratKeluarTendikController extends Controller
     public function download(SuratKeluar $suratKeluar)
     {
         if ($suratKeluar->path && Storage::disk('public')->exists($suratKeluar->path)) {
-            return Storage::disk('public')->download($suratKeluar->path, $suratKeluar->file_name);
+            return Storage::disk('public')->download(
+                $suratKeluar->path,
+                basename($suratKeluar->path) // nama file otomatis
+            );
         }
 
         return redirect()->back()->with('error', 'File tidak ditemukan.');

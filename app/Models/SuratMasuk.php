@@ -13,7 +13,11 @@ class SuratMasuk extends Model
     protected $table = 'surat_masuk';
 
     protected $fillable = [
-        'no_surat', 'tanggal', 'perihal_surat_id', 'path', 'created_by'
+        'no_surat',
+        'tanggal',
+        'perihal_surat_id',
+        'path',
+        'created_by'
     ];
 
     protected $casts = [
@@ -52,11 +56,11 @@ class SuratMasuk extends Model
     {
         $bytes = $this->file_size;
         $units = ['B', 'KB', 'MB', 'GB'];
-        
+
         for ($i = 0; $bytes > 1024; $i++) {
             $bytes /= 1024;
         }
-        
+
         return round($bytes, 2) . ' ' . $units[$i];
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +10,10 @@ class PerihalSurat extends Model
     use HasFactory;
 
     protected $table = 'perihal_surat';
-    
+
     protected $fillable = [
-        'deskripsi','no_surat'
+        'deskripsi',
+        'no_surat'
     ];
 
     public function suratMasuk()
@@ -19,8 +21,9 @@ class PerihalSurat extends Model
         return $this->hasMany(SuratMasuk::class, 'perihal_surat_id');
     }
 
-    public function noSurat(){
-        return $this->hasMany(SuratKeluar::class,'no_surat','id');
+    public function noSurat()
+    {
+        return $this->hasMany(SuratKeluar::class, 'no_surat', 'id');
     }
     public function suratKeluar()
     {
