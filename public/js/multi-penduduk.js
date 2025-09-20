@@ -191,6 +191,13 @@ class MultiPendudukForm {
             }
         });
 
+        // Real-time No KK validation
+        document.addEventListener("input", (e) => {
+            if (e.target.name && e.target.name.includes("[no_kk]")) {
+                this.validateNo_kk(e.target);
+            }
+        });
+
         // Real-time nama validation
         document.addEventListener("input", (e) => {
             if (e.target.name && e.target.name.includes("[nama]")) {
@@ -241,6 +248,48 @@ class MultiPendudukForm {
         }
     }
 
+    validateNo_kk(no_kkInput) {
+        const no_kk = no_kkInput.value;
+        let feedback = no_kkInput.parentNode.querySelector(".no_kk-feedback");
+
+        // Remove existing feedback
+        if (feedback) {
+            feedback.remove();
+        }
+
+        if (no_kk.length > 0) {
+            let isValid = true;
+            let message = "";
+            let type = "warning";
+
+            if (!/^\d+$/.test(no_kk)) {
+                isValid = false;
+                message = "❌ No KK hanya boleh berisi angka";
+                type = "error";
+            } else if (no_kk.length < 16) {
+                isValid = false;
+                message = `⏳ No KK harus 16 digit (sekarang ${no_kk.length} digit)`;
+                type = "warning";
+            } else if (no_kk.length === 16) {
+                message = "✅ No KK format sudah benar";
+                type = "success";
+            }
+
+            if (message) {
+                const feedbackDiv = document.createElement("div");
+                feedbackDiv.className = `no_kk-feedback small mt-1 ${
+                    type === "success"
+                        ? "text-success"
+                        : type === "error"
+                        ? "text-danger"
+                        : "text-warning"
+                }`;
+                feedbackDiv.innerHTML = message;
+                no_kkInput.parentNode.appendChild(feedbackDiv);
+            }
+        }
+    }
+
     validateNama(namaInput) {
         const nama = namaInput.value;
         const maxLength = 255;
@@ -260,6 +309,12 @@ class MultiPendudukForm {
                     : `❌ Melebihi batas maksimal ${Math.abs(
                           remaining
                       )} karakter`;
+            namaInput.parentNode.appendChild(feedbackDiv);
+        } else if (/^[0-9]+$/.test(nama)) {
+            let isValid = false;
+            const feedbackDiv = document.createElement("div");
+            feedbackDiv.className = "nama-feedback small text-danger mt-1";
+            feedbackDiv.innerHTML = "❌ Nama tidak boleh angka";
             namaInput.parentNode.appendChild(feedbackDiv);
         }
     }

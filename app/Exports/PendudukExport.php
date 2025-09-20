@@ -13,7 +13,7 @@ class PendudukExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Penduduk::select('nik', 'nama', 'jenis_kelamin', 'agama', 'alamat_tanggallahir')->get();
+        return Penduduk::select('nik','no_kk', 'nama', 'jenis_kelamin', 'agama', 'alamat_tanggallahir')->get();
     }
 
     /**
@@ -23,6 +23,7 @@ class PendudukExport implements FromCollection, WithHeadings
     {
         return [
             'NIK',
+            'No KK',
             'Nama',
             'Jenis Kelamin',
             'Agama',

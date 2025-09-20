@@ -7,7 +7,7 @@
     <h1 class="h2"><i class="fas fa-user me-2"></i>Detail Penduduk</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
-            @if(Auth::guard('pengguna')->user()->isAdmin())
+            @if(Auth::guard('pengguna')->user()->isPerangkatDesa())
             <a href="{{ route('penduduk.edit', $penduduk) }}" class="btn btn-warning">
                 <i class="fas fa-edit me-2"></i>Edit
             </a>
@@ -32,6 +32,13 @@
                     <div class="col-md-6 mb-4">
                         <div class="border-end pe-4">
                             <h6 class="text-muted mb-3">Data Pribadi</h6>
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted">No KK</label>
+                                <div class="fw-bold fs-5">
+                                    <code class="text-dark">{{ $penduduk->no_kk }}</code>
+                                </div>
+                            </div>
                             
                             <div class="mb-3">
                                 <label class="form-label text-muted">NIK</label>
@@ -99,17 +106,9 @@
                     </div>
                 </div>
             </div>
-            @if(Auth::guard('pengguna')->user()->isAdmin())
+            @if(Auth::guard('pengguna')->user()->isPerangkatDesa())
             <div class="card-footer">
                 <div class="d-flex justify-content-between">
-                    <form method="POST" action="{{ route('penduduk.destroy', $penduduk) }}" 
-                          onsubmit="return confirm('Yakin ingin menghapus data penduduk ini? Tindakan ini tidak dapat dibatalkan.')">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash me-2"></i>Hapus Data
-                        </button>
-                    </form>
                     
                     <a href="{{ route('penduduk.edit', $penduduk) }}" class="btn btn-warning">
                         <i class="fas fa-edit me-2"></i>Edit Data

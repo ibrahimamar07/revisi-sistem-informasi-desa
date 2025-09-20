@@ -48,6 +48,16 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
+                            <label for="no_kk" class="form-label">No KK <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control @error('no_kk') is-invalid @enderror" 
+                                   id="no_kk" name="no_kk" value="{{ old('no_kk', $penduduk->no_kk) }}" 
+                                   placeholder="16 digit No KK" maxlength="16" required>
+                            @error('no_kk')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mb-3">
                             <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
                             <input type="text" class="form-control @error('nama') is-invalid @enderror" 
                                    id="nama" name="nama" value="{{ old('nama', $penduduk->nama) }}" 
@@ -133,6 +143,9 @@
 @section('scripts')
 <script>
 document.getElementById('nik').addEventListener('input', function(e) {
+    e.target.value = e.target.value.replace(/\D/g, '').substring(0, 16);
+});
+document.getElementById('no_kk').addEventListener('input', function(e) {
     e.target.value = e.target.value.replace(/\D/g, '').substring(0, 16);
 });
 </script>

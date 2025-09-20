@@ -49,6 +49,21 @@
                         <div class="invalid-feedback d-block">{{ $message }}</div>
                     @enderror
                 </div>
+                
+                <div class="mb-3">
+                    <label for="no_kk" class="form-label">NO KK</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="bi bi-person-vcard"></i>
+                        </span>
+                        <input type="text" class="form-control @error('no_kk') is-invalid @enderror" 
+                               id="no_kk" name="no_kk" value="{{ old('no_kk') }}" required 
+                               placeholder="Masukkan NO KK  Anda">
+                    </div>
+                    @error('no_kk')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label for="nik" class="form-label">nik</label>

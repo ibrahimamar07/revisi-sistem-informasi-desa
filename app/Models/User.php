@@ -24,10 +24,10 @@ class User extends Authenticatable
         return $this->hasMany(SuratMasuk::class, 'created_by');
     }
 
-    public function suratKeluar()
-    {
-        return $this->hasMany(SuratKeluar::class, 'created_by');
-    }
+    // public function suratKeluar()
+    // {
+    //     return $this->hasMany(SuratKeluar::class, 'created_by');
+    // }
 
     public function isAdminPPTK()
     {

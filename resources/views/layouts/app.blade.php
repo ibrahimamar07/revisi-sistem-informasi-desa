@@ -84,7 +84,8 @@
                     </div>
 
                     <ul class="nav flex-column">
-                        @if(auth()->user()->isAdminPPTK())
+                        {{-- // untuk admin --}}
+                        @if(Auth::guard('pengguna')->user()->isAdmin())
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
                                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
@@ -100,13 +101,6 @@
                                     <i class="fas fa-inbox me-2"></i> Surat Masuk
                                 </a>
                             </li> --}}
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('admin.surat-keluar.*') ? 'active' : '' }}" href="{{ route('admin.surat-keluar.index') }}">
-                                    <i class="fas fa-paper-plane me-2"></i> Arsip
-                                    @if( $permohonanSuratBelumDikonfirmasi > 0)
-                                        <span class="badge bg-warning ms-2">{{  $permohonanSuratBelumDikonfirmasi }}</span>
-                                         {{-- <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span> --}}
-                                    @endif
 
                                      {{-- @if( $permohonanSuratDitolak > 0)
                                          <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span>
@@ -123,21 +117,38 @@
                                     <i class="fas fa-users me-2"></i> Kelola Akun
                                 </a>
                             </li>
+
+                        {{-- untuk perangkat desa --}}
+
+
+                             @elseif (Auth::guard('pengguna')->user()->isPerangkatDesa())
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" href="{{ route('laporan.index') }}">
+                                <a class="nav-link {{ request()->routeIs('admin.surat-keluar.*') ? 'active' : '' }}" href="{{ route('admin.surat-keluar.index') }}">
+                                    <i class="fas fa-paper-plane me-2"></i> Arsip
+                                    @if( $permohonanSuratBelumDikonfirmasi > 0)
+                                        <span class="badge bg-warning ms-2">{{  $permohonanSuratBelumDikonfirmasi }}</span>
+                                         {{-- <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span> --}}
+                                    @endif
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" href="{{ route('perangkatdesa.laporan.index') }}">
                                     <i class="fas fa-chart-bar me-2"></i> Laporan
                                 </a>
                             </li>
                             <li class="nav-item">
-                            <form id="logout-form" method="POST" action="{{ route('logout') }}" class="d-inline">
-                                @csrf
-                                <button type="submit" class="nav-link w-100 text-start border-0 bg-transparent" onclick="return confirmLogout(event)">
-                                    <i class="fas fa-sign-out-alt me-2"></i> Keluar
-                                </button>
-                            </form>
-                        </li>
-                        {{-- pendidik --}}
-                        @else
+                                    <a class="nav-link {{ request()->routeIs('admin.kepala-desa.*') ? 'active' : '' }}" href="{{ route('admin.kepala-desa.index') }}">
+                                        <i class="fas fa-user-tie me-2"></i> Data Kepala Desa
+                                    </a>
+                                    </li>
+
+
+
+
+                        {{-- untuk warga --}}
+
+
+                        @elseif (Auth::guard('pengguna')->user()->isWarga())
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('tenaga-pendidik.dashboard') ? 'active' : '' }}" href="{{ route('tenaga-pendidik.dashboard') }}">
                                     <i class="fas fa-tachometer-alt me-2"></i> Dashboard
@@ -165,8 +176,11 @@
                                         <i class="fas fa-chart-bar me-2"></i> Laporan
                                     </a>
                                 </li> --}}
-                           <li class="nav-item ">
-                            <form id="logout-form" method="POST" action="{{ route('logout') }}" class="d-inline">
+                          
+                        @endif
+                        @if (Auth::guard('pengguna')->check())
+                             <li class="nav-item ">
+                            <form id="logout-form" method="POST" action="{{ route('logoutpenduduk') }}" class="d-inline">
                                 @csrf
                                 <button type="submit" class="nav-link w-100 text-start border-0 bg-transparent " onclick="return confirmLogout(event)">
                                     <i class="fas fa-sign-out-alt me-2"></i> Keluar
@@ -179,11 +193,9 @@
 
                     <hr class="text-white-50">
 
-                    <div class="">
-                        <a href="" class="d-flex align-items-center text-white text-decoration-none fixed-bottom mb-3 ms-3 " id="dropdownUser1" data-bs-toggle="">
+                    <div class="d-flex align-items-center text-white text-decoration-none fixed-bottom mb-3 ms-3 " data-bs-toggle="" style="max-width: 200px; ">
                             <img src="{{ asset('img/profil.jpg') }}" alt="" width="32" height="32" class="rounded-circle me-2">
-                            <strong>{{ auth()->user()->name }}</strong>
-                        </a>
+                            <strong>{{ Auth::guard('pengguna')->user()->nama}}</strong>
                         </ul>
                     </div>
                 </div>

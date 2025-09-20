@@ -10,8 +10,8 @@ class PenggunaController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:pengguna');
-        $this->middleware('admin');
+        // $this->middleware('auth:pengguna');
+        // $this->middleware('admin');
     }
 
     public function show()

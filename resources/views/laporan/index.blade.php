@@ -4,7 +4,7 @@
 <div class="container">
     <h4 class="mb-4">Cetak Surat</h4>
 
-    <form action="{{ route('laporan.cetak') }}" method="POST" class="row g-3">
+    <form action="{{ route('perangkatdesa.laporan.cetak') }}" method="POST" class="row g-3">
         @csrf
 
         <div class="col-md-6">

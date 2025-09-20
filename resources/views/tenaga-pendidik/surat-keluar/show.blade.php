@@ -52,7 +52,7 @@
                     </tr> --}}
                     <tr>
                         <th>Dibuat Oleh</th>
-                        <td>{{ $suratKeluar->creator?->name?? 'pembuat tidak tersedia' }}</td>
+                        <td>{{ $suratKeluar->creator?->nama?? 'pembuat tidak tersedia' }}</td>
                     </tr>
                     <tr>
                         <th>Tanggal Dibuat</th>

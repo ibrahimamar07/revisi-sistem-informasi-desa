@@ -47,6 +47,18 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label for="nama_kades" class="form-label">Nama Kepala Desa</label>
+            <select name="nama_kades" class="form-select" required>
+                <option value="">-- Pilih Kepala Desa --</option>
+                @foreach($kepalaDesa as $kades)
+                    <option value="{{ $kades->id }}" {{ old('nama_kades', $suratKeluar->nama_kades) == $kades->id ? 'selected' : '' }}>
+                        {{ $kades->nama_kades }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         {{-- <div class="mb-3">
             <label class="form-label">File Surat (opsional)</label>
             <input type="file" name="file_surat" class="form-control">

@@ -61,6 +61,23 @@
                         @enderror
                     </div>
 
+                    <div class="mb-3">
+                        <label for="nama_kades" class="form-label">Nama Kepala Desa *</label>
+                        <select class="form-select @error('nama_kades') is-invalid @enderror" 
+                                id="nama_kades" name="nama_kades" required>
+                            <option value="">Pilih Kepala Desa</option>
+                            @foreach($kepalaDesa as $kades)
+                                <option value="{{ $kades->id }}" 
+                                        {{ old('nama_kades') == $kades->id ? 'selected' : '' }}>
+                                    {{ $kades->nama_kades }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('nama_kades')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     {{-- <div class="mb-3">
                         <label for="file_surat" class="form-label">File Surat *</label>
                         <input type="file" class="form-control @error('file_surat') is-invalid @enderror" 

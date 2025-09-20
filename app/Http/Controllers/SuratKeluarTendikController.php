@@ -118,17 +118,17 @@ class SuratKeluarTendikController extends Controller
                         ->with('success', 'Permohonan Surat berhasil diupdate.');
     }
 
-    public function destroy(SuratKeluar $suratKeluar)
-    {
-        if ($suratKeluar->path && Storage::disk('public')->exists($suratKeluar->path)) {
-            Storage::disk('public')->delete($suratKeluar->path);
-        }
+    // public function destroy(SuratKeluar $suratKeluar)
+    // {
+    //     if ($suratKeluar->path && Storage::disk('public')->exists($suratKeluar->path)) {
+    //         Storage::disk('public')->delete($suratKeluar->path);
+    //     }
         
-        $suratKeluar->delete();
+    //     $suratKeluar->delete();
 
-        return redirect()->route('tenaga-pendidik.surat-keluar.index')
-                        ->with('success', 'Permohonan Surat berhasil dihapus.');
-    }
+    //     return redirect()->route('tenaga-pendidik.surat-keluar.index')
+    //                     ->with('success', 'Permohonan Surat berhasil dihapus.');
+    // }
 
     public function download(SuratKeluar $suratKeluar)
     {

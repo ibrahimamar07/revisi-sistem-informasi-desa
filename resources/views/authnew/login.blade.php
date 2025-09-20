@@ -15,9 +15,9 @@
             <div class="alert alert-info text-sm">
                 <i class="bi bi-info-circle-fill me-2"></i>
                 <strong>Catatan:</strong> 
-                Jika Anda adalah <b>Non-Admin</b>, harap masukkan <b>NIK</b> Anda untuk login.
+                Jika Anda adalah <b>Warga</b>, harap masukkan <b>NO KK</b> Anda untuk login.
                 <br>
-                Jika Anda adalah <b>Admin</b>, cukup gunakan <b>Email & Password</b>.
+                Jika Anda adalah <b>Admin dan Perangkat Desa</b>, cukup gunakan <b>Email & Password</b>.
             </div>
 
             @if ($errors->any())
@@ -46,14 +46,14 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="nik" class="form-label">NIK</label>
+                    <label for="no_kk" class="form-label">NO KK</label>
                     <div class="input-group">
                         <span class="input-group-text">
                             <i class="bi bi-person-vcard"></i>
                         </span>
-                        <input type="text" class="form-control @error('nik') is-invalid @enderror" 
-                               id="nik" name="nik" value="{{ old('nik') }}"
-                               placeholder="Masukkan NIK Anda (khusus Non-Admin)">
+                        <input type="text" class="form-control @error('no_kk') is-invalid @enderror" 
+                               id="no_kk" name="no_kk" value="{{ old('no_kk') }}"
+                               placeholder="Masukkan NO KK  Anda (khusus Warga)">
                     </div>
                     @error('nik')
                         <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -81,9 +81,9 @@
                     </button>
                 </div>
             </form>
-            <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
+            {{-- <a href="{{ route('portal.portal') }}" class="btn btn-outline-secondary w-100 mt-2">
                 <i class="fas fa-arrow-left me-2"></i> Kembali ke Portal
-            </a>
+            </a> --}}
             <div class="text-center mt-3">
                 <p class="mb-0">Belum punya akun? 
                     <a href="{{ route('register') }}" class="text-decoration-none">Daftar di sini</a>

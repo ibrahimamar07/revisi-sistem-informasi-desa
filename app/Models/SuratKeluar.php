@@ -13,7 +13,7 @@ class SuratKeluar extends Model
     protected $table = 'surat_keluar';
 
     protected $fillable = [
-         'no_surat','tanggal', 'pengirim', 'perihal_surat_id', 'path', 'created_by','status'
+         'no_surat','tanggal', 'pengirim', 'perihal_surat_id', 'path', 'created_by','status', 'nama_kades'
     ];
 
     protected $casts = [
@@ -29,9 +29,25 @@ class SuratKeluar extends Model
         return $this->belongsTo(PerihalSurat::class,'no_surat','id');
     }
 
-    public function creator()
+    public function kepalaDesa()
     {
-        return $this->belongsTo(User::class, 'created_by');
+        return $this->belongsTo(KepalaDesa::class, 'nama_kades');
+    }
+
+    public function isNull(){
+        return $this -> nama_kades ===nulll;
+    }
+
+    
+
+    // public function creator()
+    // {
+    //     return $this->belongsTo(User::class, 'created_by');
+    // }
+
+     public function creator()
+    {
+        return $this->belongsTo(Pengguna::class, 'created_by');
     }
 
     public function getFileNameAttribute()

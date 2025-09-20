@@ -19,6 +19,7 @@ class Pengguna extends Authenticatable
         'email',
         'nomor_hp',
         'nik',
+        'no_kk',
         'alamat_tanggallahir',
         'password',
         'role',
@@ -39,8 +40,18 @@ class Pengguna extends Authenticatable
         return $this->role === 'admin';
     }
 
-    public function isNonAdmin()
+    public function isWarga()
     {
-        return $this->role === 'nonadmin';
+        return $this->role === 'warga';
+    }
+    
+    public function isPerangkatDesa()
+    {
+        return $this->role === 'perangkatdesa';
+    }
+
+     public function created_by()
+    {
+        return $this->hasMany(SuratKeluar::class, 'created_by');
     }
 }

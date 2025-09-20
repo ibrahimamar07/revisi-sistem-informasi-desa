@@ -34,10 +34,11 @@
                 <thead class="table-dark">
                     <tr>
                         <th width="5%">No</th>
-                        <th>ID</th>
                         <th>Nama</th>
-                        <th>Username</th>
-                        <th>password</th>
+                        <th>Email</th>
+                        <th>No KK</th>
+                        <th>NIK</th>
+                        <th>role</th>
                         <th width="15%">Aksi</th>
                     </tr>
                 </thead>
@@ -45,10 +46,11 @@
                     @forelse($users as $index => $user)
                     <tr @if ($user->id === auth()->id()) class="table-primary" @endif>
                         <td>{{ $users->firstItem() + $index }}</td>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name}}</td>
-                        <td>{{ $user->username }}</td>
-                        <td>{{ $user->password }}</td>
+                        <td>{{ $user->nama}}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->no_kk }}</td>
+                        <td>{{ $user->nik }}</td>
+                        <td>{{ ucfirst($user->role) }}</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="{{ route('admin.users.show', $user) }}" 
