@@ -5,7 +5,7 @@
 @section('content')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h1 class="h2"><i class="fas fa-users me-2"></i>
-        @if(Auth::guard('pengguna')->user()->isAdmin())
+        @if(Auth::guard('pengguna')->user()->isPerangkatDesa() )
             Data Penduduk
         @else
             Informasi Penduduk
@@ -31,13 +31,14 @@
                     <thead class="table-dark">
                         <tr>
                             <th>No</th>
+                            <th>No KK</th>
                             <th>NIK</th>
                             <th>Nama</th>
                             <th>Jenis Kelamin</th>
                             <th>Alamat & Tanggal Lahir</th>
                             <th>Agama</th>
                             <th>Status</th>
-                            @if(Auth::guard('pengguna')->user()->isAdmin())
+                            @if(Auth::guard('pengguna')->user()->isPerangkatDesa())
                             <th>Aksi</th>
                             @endif
                         </tr>
@@ -46,6 +47,7 @@
                         @foreach($penduduk as $index => $item)  
                     <tr>
                         <td>{{ $penduduk->firstItem() + $index }}</td>
+                         <td><code class="text-dark">{{ substr($item->no_kk, 0, -6) . str_repeat('*', 6) }}</code></td>
                         <td><code class="text-dark">{{ substr($item->nik, 0, -6) . str_repeat('*', 6) }}</code></td>
                         <td><strong>{{ $item->nama }}</strong></td>
                         <td>
@@ -68,7 +70,7 @@
                         <td>
                             <small class="text-muted">{{ Str::limit($item->status,10) }}</small>
                         </td>
-                        @if(Auth::guard('pengguna')->user()->isAdmin())
+                        @if(Auth::guard('pengguna')->user()->isPerangkatDesa())
                         <td>
                             <div class="btn-group btn-group-sm" role="group">
                                 <a href="{{ route('penduduk.show', $item) }}" class="btn btn-outline-info" title="Lihat Detail">
@@ -77,13 +79,13 @@
                                 <a href="{{ route('penduduk.edit', $item) }}" class="btn btn-outline-warning" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form method="POST" action="{{ route('penduduk.destroy', $item) }}" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
+                                {{-- <form method="POST" action="{{ route('penduduk.destroy', $item) }}" class="d-inline" onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-outline-danger" title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                </form>
+                                </form> --}}
                             </div>
                         </td>
                         @endif
@@ -98,13 +100,13 @@
                 <i class="fas fa-users fa-3x text-muted mb-3"></i>
                 <h5 class="text-muted">Belum ada data penduduk</h5>
                 <p class="text-muted">
-                    @if(Auth::guard('pengguna')->user()->isAdmin())
+                    @if(Auth::guard('pengguna')->user()->isPerangkatDesa())
                         Klik tombol "Tambah Penduduk" untuk menambahkan data baru.
                     @else
                         Belum ada data penduduk yang tersedia.
                     @endif
                 </p>
-                @if(Auth::guard('pengguna')->user()->isAdmin())
+                @if(Auth::guard('pengguna')->user()->isPerangkatDesa())
                 <a href="{{ route('penduduk.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Tambah Penduduk Pertama
                 </a>

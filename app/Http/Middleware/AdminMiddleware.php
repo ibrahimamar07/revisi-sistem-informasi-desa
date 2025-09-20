@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminMiddleware
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next,...$role)
     {
         $user = Auth::guard('pengguna')->user();
 
-        if (!$user || !$user->isAdmin()) {
-            abort(403, 'Akses ditolak. Hanya admin yang dapat mengakses halaman ini.');
+        if (!$user || !in_array($user->role,$role)) {
+            abort(403, 'Akses ditolak');
         }
-        //aman gaono masalah
+        //aman gaono masalahh
 
         return $next($request);
     }

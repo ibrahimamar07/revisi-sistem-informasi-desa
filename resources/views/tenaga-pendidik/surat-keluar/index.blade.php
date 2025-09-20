@@ -91,7 +91,7 @@
                                    class="btn btn-sm btn-warning" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('tenaga-pendidik.surat-keluar.destroy', $surat) }}" 
+                                {{-- <form action="{{ route('tenaga-pendidik.surat-keluar.destroy', $surat) }}" 
                                       method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
@@ -99,7 +99,7 @@
                                             onclick="return confirm('Yakin ingin menghapus?')" title="Hapus">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                </form>
+                                </form> --}}
                             </div>
                         </td>
                         <td>

@@ -1,8 +1,15 @@
 
 @extends('layouts.app')
 
-@section('title', 'Dashboard Admin')
+@if (Auth::guard('pengguna')->user()->role === 'admin')
+    @section('title', 'Dashboard Admin')
 @section('page-title', 'Dashboard Admin')
+
+@elseif (Auth::guard('pengguna')->user()->role === 'perangkatdesa')
+    @section('title', 'Dashboard Perangkat Desa')
+    @section('page-title', 'Dashboard perangkat Desa')
+@endif
+
 
 @section('content')
 <div class="row mb-4">
@@ -145,11 +152,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="text-center">
+                {{-- <div class="text-center">
                     <a href="{{ route('admin.surat-keluar.index') }}" class="btn btn-sm btn-outline-primary">
                         Lihat Semua Arsip
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

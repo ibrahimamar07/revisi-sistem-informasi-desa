@@ -16,23 +16,40 @@
             <div class="card-body">
                 <form action="{{ route('admin.users.store') }}" method="POST">
                     @csrf
-                    
+                     
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nama Lengkap *</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" 
-                               id="name" name="name" value="{{ old('name') }}" required>
-                        @error('name')
+                        <label for="nama" class="form-label">Nama *</label>
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" 
+                               id="nama" name="nama" value="{{ old('nama') }}" required>
+                        @error('nama')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="username" class="form-label">Username *</label>
-                       <input type="text" class="form-control" @error('username') is-invalid @enderror" 
-                        id="username" name="username" value="{{ old('username') }}" required>
-                    @error('username')
+                        <label for="email" class="form-label">Email *</label>
+                       <input type="email" class="form-control" @error('email') is-invalid @enderror" 
+                        id="email" name="email" value="{{ old('email') }}" required>
+                    @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
 
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nomor_hp" class="form-label">Nomor HP *</label>
+                       <input type="number" class="form-control" @error('nomor_hp') is-invalid @enderror" 
+                        id="nomor_hp" name="nomor_hp" value="{{ old('nomor_hp') }}" required>
+                    @error('nomor_hp')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror   
+                    </div>
+                    <div class="mb-3">
+                        <label for="alamat_tanggallahir" class="form-label">Alamat & Tanggal Lahir *</label>
+                       <input type="text" class="form-control" @error('alamat_tanggallahir') is-invalid @enderror" 
+                        id="alamat_tanggallahir" name="alamat_tanggallahir" value="{{ old('alamat_tanggallahir') }}" required>
+                    @error('alamat_tanggallahir')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                     </div>
 
                     <div class="mb-3">
@@ -40,14 +57,29 @@
                         <select class="form-select @error('role') is-invalid @enderror" 
                                 id="role" name="role" required>
                             <option value="">Pilih Role</option>
-                            <option value="admin_pptk" {{ old('role') == 'admin_pptk' ? 'selected' : '' }}>
-                                Admin PPTK
-                            </option>
-                            <option value="tenaga_pendidik" {{ old('role') == 'tenaga_pendidik' ? 'selected' : '' }}>
-                                Tenaga Pendidik
-                            </option>
+                            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                            <option value="perangkatdesa" {{ old('role') == 'perangkatdesa' ? 'selected' : '' }}>Perangkat Desa</option>
+                            <option value="warga" {{ old('role') == 'warga' ? 'selected' : '' }}>Warga</option>
                         </select>
                         @error('role')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                     <div class="mb-3" id="nik-field" style="display: none;">
+                        <label for="nik" class="form-label">NIK *</label>
+                        <input type="number" class="form-control @error('nik') is-invalid @enderror" 
+                               id="nik" name="nik" value="{{ old('nik') }}">
+                        @error('nik')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3" id="no_kk-field" style="display: none;">
+                        <label for="no_kk" class="form-label">NO KK </label>
+                        <input type="number" class="form-control @error('no_kk') is-invalid @enderror" 
+                               id="no_kk" name="no_kk" value="{{ old('no_kk') }}">
+                        @error('no_kk')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -80,4 +112,19 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const roleSelect = document.getElementById('role');
+    const nikField = document.getElementById('nik-field');
+    const noKkField = document.getElementById('no_kk-field');
+
+    function toggleNikField() {
+        nikField.style.display = (roleSelect.value === 'warga') ? 'block' : 'none';
+        noKkField.style.display = (roleSelect.value === 'warga') ? 'block' : 'none';
+    }
+
+    roleSelect.addEventListener('change', toggleNikField);
+    toggleNikField(); // initial state
+});
+</script>
 @endsection

@@ -84,7 +84,7 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('penduduk.*') ? 'active' : '' }}" href="{{ route('penduduk.index') }}">
                                 <i class="fas fa-users me-2"></i>
-                               @if(Auth::guard('pengguna')->check() && Auth::guard('pengguna')->user()->isAdmin())
+                               @if(Auth::guard('pengguna')->check() && Auth::guard('pengguna')->user()->isPerangkatDesa())
                                     Data Penduduk
                                 @else
                                     Informasi Penduduk
@@ -92,7 +92,7 @@
 
                             </a>
                         </li>
-                        @if(Auth::guard('pengguna')->check() && Auth::guard('pengguna')->user()->isAdmin())
+                        @if(Auth::guard('pengguna')->check() && Auth::guard('pengguna')->user()->isPerangkatDesa())
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('penduduk.create') ? 'active' : '' }}" href="{{ route('penduduk.create') }}">
                                 <i class="fas fa-id-card me-2"></i>
@@ -101,7 +101,7 @@
                         </li>
                         @endif
 
-                        @if(Auth::guard('pengguna')->check() && Auth::guard('pengguna')->user()->isAdmin())
+                        @if(Auth::guard('pengguna')->check() && Auth::guard('pengguna')->user()->isPerangkatDesa())
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('user.profile') ? 'active' : '' }}" href="{{ route('user.profile') }}">
                                 <i class="fas fa-user me-2"></i>

@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PendudukImport;
 use App\Exports\PendudukExport;
-use Maatwebsite\Excel\Validators\ValidationException; // Pastikan ini ada
+use Maatwebsite\Excel\Validators\ValidationException;
 
 
 class PendudukController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:pengguna');
-        $this->middleware('admin')->except(['index', 'show']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:pengguna');
+    //     $this->middleware('admin')->except(['index', 'show']);
+    // }
 
     public function index()
     {
@@ -38,6 +38,7 @@ class PendudukController extends Controller
 
         $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
             'penduduk.*.nik' => 'required|string|size:16|unique:penduduk,nik|regex:/^[0-9]+$/',
+            'penduduk.*.no_kk' => 'required|string|size:16|regex:/^[0-9]+$/',
             'penduduk.*.nama' => 'required|string|max:255',
             'penduduk.*.jenis_kelamin' => 'required|in:L,P',
             'penduduk.*.agama' => 'required|string|max:50',
@@ -58,6 +59,13 @@ class PendudukController extends Controller
                     } elseif (\App\Models\Penduduk::where('nik', $data['nik'])->exists()) {
                         $validator->errors()->add("row_{$index}_nik", "Baris {$rowNumber}: NIK {$data['nik']} sudah terdaftar");
                     }
+                        if (empty($data['no_kk'])) {
+                            $validator->errors()->add("row_{$index}_no_kk", "Baris {$rowNumber}: No KK harus diisi");
+                        } elseif (strlen($data['no_kk']) !== 16) {
+                            $validator->errors()->add("row_{$index}_no_kk", "Baris {$rowNumber}: No KK harus tepat 16 karakter");
+                        } elseif (!is_numeric($data['no_kk'])) {
+                            $validator->errors()->add("row_{$index}_no_kk", "Baris {$rowNumber}: No KK hanya boleh berisi angka");
+                        }
                     
                     if (empty($data['nama'])) {
                         $validator->errors()->add("row_{$index}_nama", "Baris {$rowNumber}: Nama harus diisi");
@@ -101,6 +109,7 @@ class PendudukController extends Controller
                 if (!empty($data['nik']) && !empty($data['nama'])) {
                     $penduduk = Penduduk::create([
                         'nik' => $data['nik'],
+                        'no_kk' => $data['no_kk'],
                         'nama' => $data['nama'],
                         'jenis_kelamin' => $data['jenis_kelamin'],
                         'agama' => $data['agama'],
@@ -141,6 +150,7 @@ class PendudukController extends Controller
     {
         $request->validate([
             'nik' => 'required|string|size:16|unique:penduduk,nik,' . $penduduk->id,
+            'no_kk' => 'required|string|size:16',
             'nama' => 'required|string|max:255',
             'alamat_tanggallahir' => 'required|string',
             'jenis_kelamin' => 'required|in:L,P',
@@ -214,10 +224,14 @@ class PendudukController extends Controller
    public function template()
 {
     $fileName = 'template-impor-' . date('Ymd-His') . '.xlsx';
-    $filePath = storage_path('app/public/template/data-penduduk-20250902-161352.xlsx');
+    $filePath = public_path('\storage\template\template_impor.xlsx');
+    //  dd($filePath);
     return response()->download($filePath, $fileName);
 }
 public function guideimpor(){
     return view('penduduk.guideimpor');
 }
 }
+
+// "C:\xampp\htdocs\revisi\storage\public\template\template_impor.xls
+// C:\xampp\htdocs\revisi\public\storage\template\template_impor.xlsx

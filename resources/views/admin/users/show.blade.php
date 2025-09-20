@@ -10,17 +10,25 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">{{ $user->name }}</h5>
-            <p class="card-text"><strong>Username:</strong> {{ $user->username }}</p>
-            <p class="card-text"><strong>Password:</strong> {{ $user->password }}</p>
+            <p class="card-text"><strong>ID:</strong> {{ $user->id }}</p>
+            <p class="card-text"><strong>Nama:</strong> {{ $user->nama }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
+            <p class="card-text"><strong>Nomor HP:</strong> {{ $user->nomor_hp }}</p>
+            <p class="card-text"><strong>NO KK:</strong> {{ $user->no_kk }}</p>
+            <p class="card-text"><strong>NIK:</strong> {{ $user->nik }}</p>
+            {{-- <p class="card-text"><strong>Password:</strong> {{ $user->password }}</p> --}}
             <p class="card-text"><strong>Role:</strong> 
-                @if($user->role === 'admin_pptk')
-                    Admin PPTK
-                @elseif($user->role === 'tenaga_pendidik')
-                    Tenaga Pendidik
+                @if($user->role === 'admin')
+                    Admin
+                @elseif($user->role === 'warga')
+                   warga
+                   @elseif($user->role === 'perangkatdesa')
+                     perangkat desa
                 @else
                     -
                 @endif
             </p>
+             <p class="card-text"><strong>Alamat & Tanggal Lahir:</strong> {{ $user->alamat_tanggallahir }}</p>
             <p class="card-text"><strong>Dibuat pada:</strong> {{ $user->created_at->format('d M Y H:i') }}</p>
             <p class="card-text"><strong>Terakhir diperbarui:</strong> {{ $user->updated_at->format('d M Y H:i') }}</p>
 

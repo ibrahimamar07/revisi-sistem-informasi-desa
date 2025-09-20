@@ -23,7 +23,7 @@ class PendudukImport extends DefaultValueBinder implements ToModel, WithHeadingR
     {
         $column = $cell->getColumn();
         
-        if ($column === 'A' || $cell->getDataType() == DataType::TYPE_STRING) {
+        if ($column === 'A' || $column==='B'|| $cell->getDataType() == DataType::TYPE_STRING) {
             $cell->setValueExplicit($value, DataType::TYPE_STRING);
             return true;
         }
@@ -37,6 +37,7 @@ class PendudukImport extends DefaultValueBinder implements ToModel, WithHeadingR
         // Data yang masuk ke sini sudah pasti valid
         return new Penduduk([
             'nik'                 => trim($row['nik']),
+            'no_kk'               => trim($row['no_kk'] ?? ''),
             'nama'                => trim($row['nama'] ?? ''),
             'jenis_kelamin'       => trim($row['jenis_kelamin'] ?? ''),
             'agama'               => trim($row['agama'] ?? ''),
@@ -48,6 +49,7 @@ class PendudukImport extends DefaultValueBinder implements ToModel, WithHeadingR
     {
         return [
             'nik' => 'required|string|size:16|unique:penduduk,nik|regex:/^[0-9]+$/',
+            'no_kk' => 'required|string|size:16|regex:/^[0-9]+$/',
             'nama' => 'required|string|max:255',
             'jenis_kelamin' => 'required|in:L,P,l,p',
             'agama' => 'required|string|max:50',

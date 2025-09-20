@@ -55,6 +55,7 @@
                         <th>Tanggal</th>
                         <th>Pengirim</th>
                         <th>Perihal</th>
+                        <th>Nama Kepala Desa</th>
                         {{-- <th>File</th> --}}
                         <th>Dibuat Oleh</th>
                         <th width="">Aksi</th>
@@ -81,7 +82,8 @@
                                 <span class="text-muted">Tidak ada file</span>
                             @endif
                         </td> --}}
-                        <td>{{ $surat->creator?->name?? 'pembuat tidak tersedia' }}</td>
+                          <td>{{ Str::limit($surat->kepalaDesa?->nama_kades ?? 'Kepala Desa Belum di Set', 25) }}</td>
+                        <td>{{ $surat->creator?->nama?? 'pembuat tidak tersedia' }}</td>
                         <td>
                             <div class="btn-group" role="group">
                                 <a href="{{ route('admin.surat-keluar.show', $surat) }}" 
@@ -93,40 +95,39 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 
-                                {{-- <form action="{{ route('admin.surat-keluar.destroy', $surat) }}" 
-                                      method="POST" class="d-inline">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger" 
-                                            onclick="return confirm('Yakin ingin menghapus?')" title="Hapus">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </form> --}}
+                                <!-- Tombol Cetak Surat -->
+                                @if($surat->status == 'disetujui')
+                                <a href="{{ route('admin.surat-keluar.cetak', $surat) }}" 
+                                   class="btn btn-sm btn-success" 
+                                   title="Cetak Surat"
+                                   target="_blank">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                                @endif
                             </div>
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                    @if($surat->status == 'belum_dikonfirmasi')
-                        <form action="{{ route('admin.approve', $surat) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Yakin ingin menyetujui surat ini?')">
-                                <i class="fas fa-check"></i>
-                            </button>
-                        </form>
+                                @if($surat->status == 'belum_dikonfirmasi')
+                                    <form action="{{ route('admin.approve', $surat) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Yakin ingin menyetujui surat ini?')" title="Setujui">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </form>
 
-                        <form action="{{ route('admin.reject', $surat) }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menolak surat ini?')">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </form>
-                        @elseif($surat->status == 'disetujui')
-                       <span class="badge bg-success">Disetujui</span>
-                   @elseif($surat->status == 'ditolak')
-                    <span class="badge bg-danger">Ditolak</span>
-             
-                    @endif
-                </div>
+                                    <form action="{{ route('admin.reject', $surat) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menolak surat ini?')" title="Tolak">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </form>
+                                @elseif($surat->status == 'disetujui')
+                                    <span class="badge bg-success">Disetujui</span>
+                                @elseif($surat->status == 'ditolak')
+                                    <span class="badge bg-danger">Ditolak</span>
+                                @endif
+                            </div>
                         </td>
                     </tr>
                     @empty

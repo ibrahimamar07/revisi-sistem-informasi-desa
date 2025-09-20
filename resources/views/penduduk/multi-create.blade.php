@@ -72,6 +72,7 @@
                 <thead>
                     <tr>
                         <th>NIK</th>
+                        <th>No KK</th>
                         <th>Nama</th>
                         <th>Jenis Kelamin</th>
                         <th>Agama</th>
@@ -81,15 +82,15 @@
                 </thead>
                 <tbody>
                     @php
-                        $oldPendudukData = session('old_penduduk_data', old('penduduk', [['nik' => '', 'nama' => '', 'jenis_kelamin' => '', 'agama' => '', 'alamat_tanggallahir' => '']]));
+                        $oldPendudukData = session('old_penduduk_data', old('penduduk', [['nik' => '', 'no_kk'=>'' ,'nama' => '', 'jenis_kelamin' => '', 'agama' => '', 'alamat_tanggallahir' => '']]));
                         $rowCount = max(1, count($oldPendudukData));
                     @endphp
                     
                     @for ($i = 0; $i < $rowCount; $i++)
                         @php
-                            $rowData = $oldPendudukData[$i] ?? ['nik' => '', 'nama' => '', 'jenis_kelamin' => '', 'agama' => '', 'alamat_tanggallahir' => ''];
+                            $rowData = $oldPendudukData[$i] ?? ['nik' => '','no_kk' =>'' , 'nama' => '', 'jenis_kelamin' => '', 'agama' => '', 'alamat_tanggallahir' => ''];
                         @endphp
-                        <tr data-index="{{ $i }}" @if($errors->hasAny(["row_{$i}_nik", "row_{$i}_nama", "row_{$i}_jk", "row_{$i}_agama", "row_{$i}_alamat"])) class="table-danger" @endif>
+                        <tr data-index="{{ $i }}" @if($errors->hasAny(["row_{$i}_nik","row_{$i}_no_kk","row_{$i}_nama", "row_{$i}_jk", "row_{$i}_agama", "row_{$i}_alamat"])) class="table-danger" @endif>
                             <td>
                                 <input type="text" 
                                        name="penduduk[{{ $i }}][nik]" 
@@ -102,6 +103,17 @@
                                     <div class="invalid-feedback">{{ $errors->first("row_{$i}_nik") }}</div>
                                 @endif
                             </td>
+                            <td>
+                                <input type="text" 
+                                       name="penduduk[{{ $i }}][no_kk]" 
+                                       class="form-control @if($errors->has("row_{$i}_no_kk")) is-invalid @endif" 
+                                       maxlength="16" 
+                                       placeholder="Masukkan 16 digit No KK"
+                                       value="{{ $rowData['no_kk'] }}"
+                                       required>
+                                @if($errors->has("row_{$i}_no_kk"))
+                                    <div class="invalid-feedback">{{ $errors->first("row_{$i}_no_kk") }}</div>
+                                @endif
                             <td>
                                 <input type="text" 
                                        name="penduduk[{{ $i }}][nama]" 
