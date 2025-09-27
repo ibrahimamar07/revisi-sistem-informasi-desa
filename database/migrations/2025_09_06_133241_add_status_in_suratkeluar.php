@@ -7,24 +7,24 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Tambahkan kolom status ke tabel surat_keluar.
      */
     public function up(): void
     {
         Schema::table('surat_keluar', function (Blueprint $table) {
-                //
-           $table->enum('status', ['belum_dikonfirmasi', 'disetujui','ditolak'])->default('belum_dikonfirmasi');
+            $table->enum('status', ['belum_dikonfirmasi', 'disetujui', 'ditolak'])
+                ->default('belum_dikonfirmasi')
+                ->after('id'); // letakkan setelah kolom id (boleh diganti sesuai kebutuhan)
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Rollback perubahan (hapus kolom status).
      */
     public function down(): void
     {
         Schema::table('surat_keluar', function (Blueprint $table) {
-            //
-              $table->dropColumn('status');
+            $table->dropColumn('status');
         });
     }
 };

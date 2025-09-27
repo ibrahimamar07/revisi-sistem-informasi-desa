@@ -8,8 +8,6 @@ use App\Models\SuratKeluar;
 use App\Models\PerihalSurat;
 use Illuminate\Support\Facades\Storage;
 
-
-
 class LaporanController extends Controller
 {
     public function index()

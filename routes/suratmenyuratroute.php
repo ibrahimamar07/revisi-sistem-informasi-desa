@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
             // Surat Keluar
             Route::resource('surat-keluar', SuratKeluarController::class);
             Route::get('surat-keluar/{suratKeluar}/download', [SuratKeluarController::class, 'download'])->name('surat-keluar.download');
-             Route::post('/{suratKeluar}/approve', [SuratKeluarController::class, 'approve'])->name('approve');
+            Route::post('/{suratKeluar}/approve', [SuratKeluarController::class, 'approve'])->name('approve');
             Route::post('/{suratKeluar}/reject', [SuratKeluarController::class, 'reject'])->name('reject');
 
             // Users Management
@@ -71,13 +71,13 @@ Route::middleware('auth')->group(function () {
     // Tenaga Pendidik Routes
     Route::middleware('role:tenaga_pendidik')->group(function () {
         Route::prefix('Perangkat Desa 1')->name('tenaga-pendidik.')->group(function () {
-            
+
             // Dashboard
             Route::get('/dashboard', [DashboardController::class, 'tenagaPendidikDashboard'])->name('dashboard');
 
-        //    Route::resource('surat-masuk', SuratMasukTendikController::class);
-        //     Route::get('surat-masuk/{suratMasuk}/download', [SuratMasukTendikController::class, 'download'])->name('surat-masuk.download');
- 
+            //    Route::resource('surat-masuk', SuratMasukTendikController::class);
+            //     Route::get('surat-masuk/{suratMasuk}/download', [SuratMasukTendikController::class, 'download'])->name('surat-masuk.download');
+
             // Surat Keluar
             Route::resource('surat-keluar', SuratKeluarTendikController::class);
             Route::get('surat-keluar/{suratKeluar}/download', [SuratKeluarTendikController::class, 'download'])->name('surat-keluar.download');
@@ -98,6 +98,5 @@ Route::middleware('auth')->group(function () {
         // Route::post('/laporan/cetak', [LaporanController::class, 'cetak'])->name('laporan.cetak');
         Route::get('/laporan', [App\Http\Controllers\SuratController::class, 'form'])->name('laporan.index');
         Route::post('/laporan/cetak', [App\Http\Controllers\SuratController::class, 'generate'])->name('laporan.cetak');
-
     });
 });
