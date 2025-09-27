@@ -26,13 +26,21 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="deskripsi" class="form-label">Deskripsi Perihal *</label>
+                        <label for="deskripsi" class="form-label">Perihal *</label>
                         <textarea class="form-control @error('deskripsi') is-invalid @enderror" 
                                   id="deskripsi" name="deskripsi" rows="4" required>{{ old('deskripsi') }}</textarea>
                         @error('deskripsi')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="mb-3">
+                        <label for="kepentingan" class="form-label">Deskripsi *</label>
+                        <input type="text" class="form-control @error('kepentingan') is-invalid @enderror" 
+                               id="kepentingan" name="kepentingan" value="{{ old('kepentingan') }}" required>
+                        @error('kepentingan')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>  
 
                     <div class="d-flex justify-content-between">
                         <a href="{{ route('admin.perihal-surat.index') }}" class="btn btn-secondary">

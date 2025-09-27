@@ -27,6 +27,10 @@
             <label for="no_surat" class="form-label">No surat</label>
             <input type="text" name="no_surat" class="form-control" value="{{ old('nosurat', $perihalSurat->no_surat) }}" required>
         </div> 
+        <div class="mb-3">
+            <label for="kepentingan" class="form-label">Kepentingan</label>
+            <input type="text" name="kepentingan" class="form-control" value="{{ old('kepentingan', $perihalSurat->kepentingan) }}" required>
+        </div>
 
         <button type="submit" class="btn btn-primary">Update</button>
         <a href="{{ route('admin.perihal-surat.index') }}" class="btn btn-secondary">Batal</a>

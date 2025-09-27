@@ -122,6 +122,11 @@
 
 
                              @elseif (Auth::guard('pengguna')->user()->isPerangkatDesa())
+                             <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                                    <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('admin.surat-keluar.*') ? 'active' : '' }}" href="{{ route('admin.surat-keluar.index') }}">
                                     <i class="fas fa-paper-plane me-2"></i> Arsip
@@ -130,7 +135,7 @@
                                          {{-- <span class="badge bg-danger ms-2">{{  $permohonanSuratDitolak }}</span> --}}
                                     @endif
                                 </a>
-                            </li>
+                            </li> 
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('laporan.*') ? 'active' : '' }}" href="{{ route('perangkatdesa.laporan.index') }}">
                                     <i class="fas fa-chart-bar me-2"></i> Laporan

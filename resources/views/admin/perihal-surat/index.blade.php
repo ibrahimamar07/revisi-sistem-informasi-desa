@@ -32,8 +32,9 @@
                 <thead class="table-dark">
                     <tr>
                         <th width="5%">No</th>
-                        <th>Deskripsi Perihal</th>
+                        <th>Perihal</th>
                         <th>No surat</th>
+                        <th>Deskripsi</th>
                         {{-- <th>Jumlah Surat Masuk</th> --}}
                         <th>Jumlah Permohonan Surat</th>
                         <th>Tanggal Dibuat</th>
@@ -46,6 +47,7 @@
                         <td>{{ $perihalSurat->firstItem() + $index }}</td>
                         <td>{{ Str::limit($perihal->deskripsi, 50) }}</td>
                         <td> {{ $perihal->no_surat }} </td>
+                        <td> {{ $perihal->kepentingan }} </td>
                         {{-- <td>
                             <span class="badge bg-info">{{ $perihal->surat_masuk_count ?? 0 }}</span>
                         </td> --}}

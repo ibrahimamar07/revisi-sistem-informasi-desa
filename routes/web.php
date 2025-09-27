@@ -70,11 +70,19 @@ Route::middleware('auth:pengguna')->group(function () {
     Route::resource('penduduk', PendudukController::class, ['except'=> ['index']])->names('penduduk');
 });
 //surat menyurat
+
+Route::middleware(['role:admin,perangkatdesa'])->group(function () {
+        Route::prefix('admin')->name('admin.')->group(function () {
+            // Surat Masuk
+            Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
+        });
+    
+});
 Route::middleware('role:admin')->group(function () {
         Route::prefix('admin')->name('admin.')->group(function () {
 
             // Dashboard untuk admin
-            Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
+            
 
             // Perihal Surat
             Route::resource('perihal-surat', PerihalSuratController::class);
@@ -101,7 +109,7 @@ Route::middleware('role:warga')->group(function () {
 Route::middleware('role:perangkatdesa')->group(function () {
         Route::prefix('perangkatdesa')->name('admin.')->group(function () {
             //arsip surat
-         Route::get('/dashboard', [DashboardController::class, 'adminDashboard'])->name('dashboard');
+      
          Route::resource('surat-keluar', SuratKeluarController::class);
              Route::post('/{suratKeluar}/approve', [SuratKeluarController::class, 'approve'])->name('approve');
             Route::post('/{suratKeluar}/reject', [SuratKeluarController::class, 'reject'])->name('reject');

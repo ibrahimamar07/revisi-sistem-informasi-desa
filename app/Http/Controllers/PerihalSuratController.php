@@ -30,6 +30,7 @@ class PerihalSuratController extends Controller
         $validated = $request->validate([
             'deskripsi' => 'required|string',
             'no_surat' => 'required|string|unique:perihal_surat',
+            'kepentingan' => 'required|string'
         ]);
 
         PerihalSurat::create($validated);
@@ -52,7 +53,9 @@ class PerihalSuratController extends Controller
     {
         $validated = $request->validate([
             'deskripsi' => 'required|string',
-             'no_surat' => 'required|string|unique:perihal_surat',
+             'no_surat' => 'required|string|exists:perihal_surat',
+            'kepentingan' => 'required|string'
+
         ]);
 
         $perihalSurat->update($validated);

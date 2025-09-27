@@ -104,8 +104,7 @@
         
         <p>
             Nama tersebut di atas benar warga Desa Gumawangrejo, Kecamatan Pituruh, Kabupaten Purworejo.
-            Berdasarkan keterangan yang ada pada kami benar bahwa yang bersangkutan tergolong keluarga yang tidak
-            mampu. Surat keterangan ini dibuat untuk keperluan yang bersangkutan.
+            Berdasarkan keterangan yang ada pada kami benar bahwa yang bersangkutan {{$deskripsi }}. Surat keterangan ini dibuat untuk keperluan yang bersangkutan.
         </p>
         
         <p>Demikian surat keterangan ini dibuat, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</p>
