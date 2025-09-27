@@ -200,7 +200,8 @@ public function cetak(SuratKeluar $suratKeluar)
             'no_surat' => $suratKeluar->perihalSurat?->no_surat ?? 'No surat tidak tersedia',
             'kepala_desa' => $suratKeluar->kepalaDesa?->nama_kades ?? 'SUKIMAN',
             'tanggal_surat' => $suratKeluar->tanggal,
-            'perihal' => $suratKeluar->perihalSurat?->deskripsi ?? 'Keterangan Tidak Mampu'
+            'perihal' => $suratKeluar->perihalSurat?->deskripsi ?? 'perihal belum ada',
+            'deskripsi' => $suratKeluar->perihalSurat?->kepentingan ?? 'deskripsi belum ada',
         ];
 
         // Generate PDF

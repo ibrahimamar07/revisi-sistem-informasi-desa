@@ -12,8 +12,7 @@ class PerihalSurat extends Model
     protected $table = 'perihal_surat';
 
     protected $fillable = [
-        'deskripsi',
-        'no_surat'
+        'deskripsi','no_surat', 'kepentingan'
     ];
 
     public function suratMasuk()
